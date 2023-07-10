@@ -6,7 +6,7 @@ class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String)
 
-class GenreSchema(db.Model):
+class GenreSchema(ma.Schema):
     class Meta:
         fields = ('id', 'schema')
 

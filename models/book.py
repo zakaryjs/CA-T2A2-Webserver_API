@@ -9,7 +9,7 @@ class Book(db.Model):
     page_count = db.Column(db.Integer)
     format = db.Column(db.String)
 
-class BookSchema(db.Model):
+class BookSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'genre', 'page_count', 'format')
 

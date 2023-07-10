@@ -6,7 +6,7 @@ class Format(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     format = db.Column(db.String)
 
-class FormatSchema(db.Model):
+class FormatSchema(ma.Schema):
     class Meta:
         fields = ('id', 'schema')
 
