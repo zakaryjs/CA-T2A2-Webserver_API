@@ -8,7 +8,7 @@ class Genre(db.Model):
 
 class GenreSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'schema')
+        fields = ('id', 'genre')
 
 genre_schema = GenreSchema
 genres_schema = GenreSchema(many=True)
