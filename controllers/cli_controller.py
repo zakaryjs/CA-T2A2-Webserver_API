@@ -6,12 +6,12 @@ database_commands = Blueprint('db', __name__)
 
 @database_commands.cli.command('create')
 def create_database():
-    db.create_all
+    db.create_all()
     print("Tables have been created.")
 
 @database_commands.cli.command('drop')
 def drop_database():
-    db.drop_all
+    db.drop_all()
     print("Tables have been dropped.")
 
 @database_commands.cli.command('seed')
@@ -31,5 +31,7 @@ def seed_database():
     ]
 
     db.session.add_all(users)
+
+    db.session.commit()
 
     print("Tables have been seeded.")
