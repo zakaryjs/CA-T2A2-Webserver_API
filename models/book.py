@@ -5,9 +5,14 @@ class Book(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    genre = db.Column(db.String)
     page_count = db.Column(db.Integer)
-    format = db.Column(db.String)
+
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
+    format_id = db.Colunm(db.Integer, db.ForeignKey('formats.id'))
+
+    collection = db.relationship('Collection', back_populates='books')
+    genre = db.relationship('Genre', back_populates='books')
+    format = db.relationship('Format', back_populates='books')
 
 class BookSchema(ma.Schema):
     class Meta:
