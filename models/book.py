@@ -9,7 +9,7 @@ class Book(db.Model):
     page_count = db.Column(db.Integer)
 
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
-    format_id = db.Colunm(db.Integer, db.ForeignKey('formats.id'))
+    format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
 
     collection = db.relationship('Collection', back_populates='books')
     genre = db.relationship('Genre', back_populates='books')
