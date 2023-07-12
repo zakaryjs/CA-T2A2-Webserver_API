@@ -12,6 +12,7 @@ class User(db.Model):
 
 class UserSchema(ma.Schema):
     collections = fields.List(fields.Nested('CollectionSchema'))
+    
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin')
 
