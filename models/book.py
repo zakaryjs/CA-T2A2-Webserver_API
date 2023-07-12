@@ -1,4 +1,5 @@
 from init import db, ma
+from marshmallow import fields
 
 class Book(db.Model):
     __tablename__ = 'books'
@@ -15,6 +16,9 @@ class Book(db.Model):
     format = db.relationship('Format', back_populates='books')
 
 class BookSchema(ma.Schema):
+    genre = fields.List(fields.Nested('GenreSchema', exclude=['id']))
+    format = fields.List(fields.Nested('FormatSchema', exclude=['id']))
+
     class Meta:
         fields = ('id', 'title', 'genre', 'page_count', 'format')
 

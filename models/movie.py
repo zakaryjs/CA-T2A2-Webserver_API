@@ -1,4 +1,5 @@
 from init import db, ma
+from marshmallow import fields
 
 class Movie(db.Model):
     __tablename__ = 'movies'
@@ -16,6 +17,9 @@ class Movie(db.Model):
 
 
 class MovieSchema(ma.Schema):
+    genre = fields.List(fields.Nested('GenreSchema', exclude=['id']))
+    format = fields.List(fields.Nested('FormatSchema', exclude=['id']))
+
     class Meta:
         fields = ('id', 'title', 'genre', 'run_time', 'format')
 
