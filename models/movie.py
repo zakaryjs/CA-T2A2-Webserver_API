@@ -5,9 +5,15 @@ class Movie(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
-    genre = db.Column(db.String)
     run_time = db.Column(db.Integer)
-    format = db.Column(db.String)
+
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
+    format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
+
+    collection = db.relationship('Collection', back_populates='movies')
+    genre = db.relationship('Genre', back_populates='movies')
+    format = db.relationship('Format', back_populates='movies')
+
 
 class MovieSchema(ma.Schema):
     class Meta:
