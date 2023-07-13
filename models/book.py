@@ -22,7 +22,7 @@ class BookSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
 
     class Meta:
-        fields = ('id', 'title', 'genre', 'page_count', 'format', 'user')
+        fields = ('id', 'title', 'genre', 'page_count', 'format', 'user_id')
 
 book_schema = BookSchema
 books_schema = BookSchema(many=True)
