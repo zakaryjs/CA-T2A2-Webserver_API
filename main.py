@@ -3,6 +3,7 @@ import os
 from init import db, ma, bcrypt, jwt
 from controllers.cli_controller import database_commands
 from controllers.auth_controller import authentication_blueprint
+from controllers.book_controller import books_bp
 
 def create_app():
     app = Flask(__name__)
@@ -20,5 +21,6 @@ def create_app():
 
     app.register_blueprint(database_commands)
     app.register_blueprint(authentication_blueprint)
+    app.register_blueprint(books_bp)
 
     return app

@@ -14,7 +14,7 @@ books_bp = Blueprint('books', __name__, url_prefix='/books')
 
 @books_bp.route('/')
 def get_all_books():
-    stmt = db.select(Book).order_by(Book.date.desc())
+    stmt = db.select(Book).order_by(Book.id.desc())
     books = db.session.scalars(stmt)
     return books_schema.dump(books)
 
