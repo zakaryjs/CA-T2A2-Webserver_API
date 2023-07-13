@@ -17,7 +17,7 @@ class CollectionSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
 
     class Meta:
-        fields = ('id', 'user_id', 'movie_id', 'book_id')
+        fields = ('id', 'user', 'movie_id', 'book_id')
 
 collection_schema = CollectionSchema
 collections_schema = CollectionSchema(many=True)
