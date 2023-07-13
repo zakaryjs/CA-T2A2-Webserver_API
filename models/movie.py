@@ -23,7 +23,7 @@ class MovieSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
 
     class Meta:
-        fields = ('id', 'title', 'genre', 'run_time', 'format', 'user')
+        fields = ('id', 'title', 'genre', 'run_time', 'format', 'user_id')
 
 movie_schema = MovieSchema
 movies_schema = MovieSchema(many=True)
