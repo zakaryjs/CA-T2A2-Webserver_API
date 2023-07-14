@@ -1,6 +1,7 @@
 from init import db, bcrypt
 from flask import Blueprint
 from models.user import User
+from models.collection import Collection
 
 database_commands = Blueprint('db', __name__)
 
@@ -31,6 +32,15 @@ def seed_database():
     ]
 
     db.session.add_all(users)
+
+    collections = [
+        Collection(
+        id=1,
+        user=users[0]
+        )
+    ]
+
+    db.session.add_all(collections)
 
     db.session.commit()
 
