@@ -35,7 +35,7 @@ def create_book():
         title=json_data.get('title'),
         genre=json_data.get('genre'),
         page_count=json_data.get('page_count'),
-        format=json_data.get('page_count'),
+        format=json_data.get('format'),
         user_id=get_jwt_identity()
     )
     db.session.add(book)
