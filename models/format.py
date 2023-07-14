@@ -1,7 +1,7 @@
 from init import db, ma
 
 class Format(db.Model):
-    __tablename__ = 'format'
+    __tablename__ = 'formats'
 
     id = db.Column(db.Integer, primary_key=True)
     format = db.Column(db.String)

@@ -2,6 +2,10 @@ from init import db, bcrypt
 from flask import Blueprint
 from models.user import User
 from models.collection import Collection
+from models.book import Book
+from models.format import Format
+from models.genre import Genre
+from models.movie import Movie
 
 database_commands = Blueprint('db', __name__)
 
@@ -33,14 +37,25 @@ def seed_database():
 
     db.session.add_all(users)
 
-    collections = [
-        Collection(
-        id=1,
-        user=users[0]
+    formats = [
+        Format(
+        format='Paperback'
+        ),
+        Format(
+        format='Hardcover'
+        ),
+        Format(
+        format='Comic'
+        ),
+        Format(
+        format='Omnibus'
+        ),
+        Format(
+        format='Graphic Novel'
         )
     ]
 
-    db.session.add_all(collections)
+    db.session.add_all(formats)
 
     db.session.commit()
 

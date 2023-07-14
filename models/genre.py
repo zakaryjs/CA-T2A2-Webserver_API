@@ -1,7 +1,7 @@
 from init import db, ma
 
 class Genre(db.Model):
-    __tablename__ = 'genre'
+    __tablename__ = 'genres'
 
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String)
