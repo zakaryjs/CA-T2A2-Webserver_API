@@ -36,3 +36,33 @@ def create_movie():
     db.session.add(movie)
     db.session.commit()
     return movie_schema.dump(movie), 201
+
+@movies_bp.route('/<int:id>', methods=['DELETE'])
+@jwt_required
+def delete_one_movie(id):
+    admin_status = authorise_admin
+    if not admin_status:
+        return {'error': 'You must have admin permissions to delete movies.'}
+    stmt = db.select(Movie).filter_by(id)
+    movie = db.session.scalar(stmt)
+    if movie:
+        return {'error': f'Movie {movie.title} has been deleted succesfully.'}
+    else:
+        return {'error': f'A movie with the id {id} does not exist.'}, 404
+    
+@movies_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
+@jwt_required
+def update_one_movie(id):
+    json_data = movie_schema.load(request.get_json(), partial=True)
+    stmt = db.select(Movie).filter_by(id=id)
+    movie = db.session.scalar(stmt)
+    if movie:
+        if str(movie.user_id) != get_jwt_identity:
+            return {'error': 'You must be the owner of the movie in order to edit it.'}, 403
+        movie.title = json_data.get('title') or movie.title
+        movie.genre = json_data.get('genre') or movie.genre
+        movie.run_time = json_data.get('run_time') or movie.run_time
+        movie.format = json_data.get('format') or movie.format
+        return movie_schema.dump(movie)
+    else:
+        return {'error': f'A movie with the id {id} does not exist.'}, 404

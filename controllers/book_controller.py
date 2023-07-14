@@ -44,7 +44,7 @@ def create_book():
 
 @books_bp.route('/<int:id>', methods=['DELETE'])
 @jwt_required
-def delete_one_card(id):
+def delete_one_movie(id):
     admin_status = authorise_admin
     if not admin_status:
         return {'error': 'You must have admin permissions to delete books.'}
