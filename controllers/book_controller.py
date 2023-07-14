@@ -43,7 +43,7 @@ def create_book():
     return book_schema.dump(book), 201
 
 @books_bp.route('/<int:id>', methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_one_movie(id):
     admin_status = authorise_admin
     if not admin_status:
@@ -55,7 +55,7 @@ def delete_one_movie(id):
     else: return {'error': f'A book with the id {id} does not exist.'}, 404
 
 @books_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
-@jwt_required
+@jwt_required()
 def update_one_book(id):
     json_data = book_schema.load(request.get_json(), partial=True)
     stmt = db.select(Book).filter_by(id=id)

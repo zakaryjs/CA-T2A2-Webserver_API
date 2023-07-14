@@ -23,7 +23,7 @@ def get_one_controller(id):
         return {'error': f'A collection with the id {id} does not exist.'}, 404
     
 @collections_bp.route('/', methods=['POST'])
-@jwt_required
+@jwt_required()
 def create_collection():
     json_data = collection_schema.load(request.get_json)
     collection = Collection(
@@ -34,7 +34,7 @@ def create_collection():
     return collection_schema.dump(collection), 201
 
 @collections_bp.route('/<int:id>', methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_one_collection(id):
     admin_status = authorise_admin
     if not admin_status:

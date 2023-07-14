@@ -23,7 +23,7 @@ def get_one_movie(id):
         return {'error': f'A movie with the id {id} does not exist.'}, 404
     
 @movies_bp.route('/', methods=['POST'])
-@jwt_required
+@jwt_required()
 def create_movie():
     json_data = movie_schema.load(request.get_json)
     movie = Movie(
@@ -38,7 +38,7 @@ def create_movie():
     return movie_schema.dump(movie), 201
 
 @movies_bp.route('/<int:id>', methods=['DELETE'])
-@jwt_required
+@jwt_required()
 def delete_one_movie(id):
     admin_status = authorise_admin
     if not admin_status:
@@ -51,7 +51,7 @@ def delete_one_movie(id):
         return {'error': f'A movie with the id {id} does not exist.'}, 404
     
 @movies_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
-@jwt_required
+@jwt_required()
 def update_one_movie(id):
     json_data = movie_schema.load(request.get_json(), partial=True)
     stmt = db.select(Movie).filter_by(id=id)
