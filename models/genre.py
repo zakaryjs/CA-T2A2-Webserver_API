@@ -6,6 +6,9 @@ class Genre(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String)
 
+    movies = db.relationship('Movie', back_populates=('genre'))
+    books = db.relationship('Book', back_populates=('genre'))
+
 class GenreSchema(ma.Schema):
     class Meta:
         fields = ('id', 'genre')
