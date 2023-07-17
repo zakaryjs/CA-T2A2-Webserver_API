@@ -12,7 +12,7 @@ class Movie(db.Model):
     format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    collection = db.relationship('Collection', back_populates='movies')
+    collection = db.relationship('Collection', back_populates='movies', cascade='all, delete')
     genre = db.relationship('Genre', back_populates='movies')
     format = db.relationship('Format', back_populates='movies')
 

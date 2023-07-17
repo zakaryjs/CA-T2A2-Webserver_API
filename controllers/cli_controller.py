@@ -36,6 +36,7 @@ def seed_database():
     ]
 
     db.session.add_all(users)
+    db.session.commit()
 
     formats = [
         Format(
@@ -56,6 +57,46 @@ def seed_database():
     ]
 
     db.session.add_all(formats)
+
+    genres = [
+        Genre(
+        genre='Action'
+        ),
+        Genre(
+        genre='Adventure'
+        ),
+        Genre(
+        genre='Comedy'
+        ),
+        Genre(
+        genre='Crime'
+        ),
+        Genre(
+        genre='Fantasy'
+        ),
+        Genre(
+        genre='Historical'
+        ),
+        Genre(
+        genre='Horror'
+        ),
+        Genre(
+        genre='Romance'
+        ),
+        Genre(
+        genre='Science Fiction'
+        )
+    ]
+
+    db.session.add_all(genres)
+
+    collections = [
+        Collection(
+        user_id=users[0].id
+        )
+    ]
+
+    db.session.add_all(collections)
 
     db.session.commit()
 

@@ -10,14 +10,14 @@ class Collection(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    movies = db.relationship('Movie', back_populates=('collection'))
-    books = db.relationship('Book', back_populates=('collection'))
+    movies = db.relationship('Movie', back_populates='collection')
+    books = db.relationship('Book', back_populates='collection')
 
 class CollectionSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
 
     class Meta:
-        fields = ('id', 'user', 'movie_id', 'book_id')
+        fields = ('id', 'user_id', 'movie_id', 'book_id')
 
 collection_schema = CollectionSchema
 collections_schema = CollectionSchema(many=True)
