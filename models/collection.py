@@ -19,5 +19,5 @@ class CollectionSchema(ma.Schema):
     class Meta:
         fields = ('id', 'user_id', 'movie_id', 'book_id')
 
-collection_schema = CollectionSchema
+collection_schema = CollectionSchema()
 collections_schema = CollectionSchema(many=True)
