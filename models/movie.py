@@ -25,5 +25,5 @@ class MovieSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'genre', 'run_time', 'format', 'user_id')
 
-movie_schema = MovieSchema
+movie_schema = MovieSchema()
 movies_schema = MovieSchema(many=True)

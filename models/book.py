@@ -24,5 +24,5 @@ class BookSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'genre', 'page_count', 'format', 'user_id')
 
-book_schema = BookSchema
+book_schema = BookSchema()
 books_schema = BookSchema(many=True)
