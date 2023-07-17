@@ -97,7 +97,31 @@ def seed_database():
     ]
 
     db.session.add_all(collections)
+    db.session.commit()
 
+    movies = [
+        Movie(
+        title='Test Movie',
+        genre=genres[0],
+        run_time=120,
+        format=formats[0],
+        user_id=users[0].id
+        )
+    ]
+
+    db.session.add_all(movies)
+
+    books = [
+        Book(
+        title='Test Book',
+        genre=genres[0],
+        page_count=120,
+        format=formats[0],
+        user_id=users[0].id
+        )
+    ]
+
+    db.session.add_all(books)
     db.session.commit()
 
     print("Tables have been seeded.")
