@@ -13,5 +13,5 @@ class GenreSchema(ma.Schema):
     class Meta:
         fields = ('id', 'genre')
 
-genre_schema = GenreSchema
+genre_schema = GenreSchema()
 genres_schema = GenreSchema(many=True)
