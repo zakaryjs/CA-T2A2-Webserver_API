@@ -5,9 +5,8 @@ class Collection(db.Model):
     __tablename__ = 'collections'
 
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
 
-    movie_id = db.Column(db.Integer, db.ForeignKey('movies.id'))
-    book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     movies = db.relationship('Movie', back_populates='collection')
@@ -15,9 +14,11 @@ class Collection(db.Model):
 
 class CollectionSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
+    movies = fields.List(fields.Nested('MovieSchema'))
+    books = fields.List(fields.Nested('BookSchema'))
 
     class Meta:
-        fields = ('id', 'user_id', 'movie_id', 'book_id')
+        fields = ('id', 'name', 'user_id', 'movie', 'book')
 
 collection_schema = CollectionSchema()
 collections_schema = CollectionSchema(many=True)

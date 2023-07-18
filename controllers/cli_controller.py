@@ -92,6 +92,7 @@ def seed_database():
 
     collections = [
         Collection(
+        name='Test Collection',
         user_id=users[0].id
         )
     ]
@@ -105,6 +106,7 @@ def seed_database():
         genre=genres[0],
         run_time=120,
         format=formats[0],
+        collection=collections[0]
         )
     ]
 
@@ -116,6 +118,7 @@ def seed_database():
         genre=genres[0],
         page_count=120,
         format=formats[0],
+        collection=collections[0]
         )
     ]
 

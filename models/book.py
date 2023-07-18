@@ -10,7 +10,7 @@ class Book(db.Model):
 
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
     format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
-    # user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
 
     collection = db.relationship('Collection', back_populates='books', cascade='all, delete')
     genre = db.relationship('Genre', back_populates='books')
@@ -19,10 +19,10 @@ class Book(db.Model):
 class BookSchema(ma.Schema):
     genre = fields.Nested('GenreSchema', exclude=['id'])
     format = fields.Nested('FormatSchema')
-    user = fields.Nested('UserSchema', only=['name', 'email'])
+    collection = fields.Nested('CollectionSchema')
 
     class Meta:
-        fields = ('id', 'title', 'genre', 'page_count', 'format')
+        fields = ('id', 'title', 'genre', 'page_count', 'format', 'collection')
         ordered = True
 
 book_schema = BookSchema()
