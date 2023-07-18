@@ -23,6 +23,7 @@ class MovieSchema(ma.Schema):
 
     class Meta:
         fields = ('id', 'title', 'genre', 'run_time', 'format')
+        ordered = True
 
 movie_schema = MovieSchema()
 movies_schema = MovieSchema(many=True)
