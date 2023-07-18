@@ -9,6 +9,7 @@ class Collection(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
+    user = db.relationship('User', back_populates='collections')
     movies = db.relationship('Movie', back_populates='collection')
     books = db.relationship('Book', back_populates='collection')
 
@@ -18,7 +19,7 @@ class CollectionSchema(ma.Schema):
     books = fields.List(fields.Nested('BookSchema'))
 
     class Meta:
-        fields = ('id', 'name', 'user_id', 'movie', 'book')
+        fields = ('id', 'name', 'user', 'movie', 'book')
 
 collection_schema = CollectionSchema()
 collections_schema = CollectionSchema(many=True)

@@ -10,6 +10,8 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    collections = db.relationship('Collection', back_populates='user', cascade='all, delete')
+
 class UserSchema(ma.Schema):
     collections = fields.List(fields.Nested('CollectionSchema'))
     
