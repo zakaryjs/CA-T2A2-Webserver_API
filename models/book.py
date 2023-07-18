@@ -22,7 +22,8 @@ class BookSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
 
     class Meta:
-        fields = ('id', 'title', 'genre_id', 'page_count', 'format_id')
+        fields = ('id', 'title', 'genre', 'page_count', 'format')
+        ordered = True
 
 book_schema = BookSchema()
 books_schema = BookSchema(many=True)

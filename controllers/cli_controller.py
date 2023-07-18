@@ -102,9 +102,9 @@ def seed_database():
     movies = [
         Movie(
         title='Test Movie',
-        genre_id=genres[0].id,
+        genre=genres[0],
         run_time=120,
-        format_id=formats[0].id,
+        format=formats[0],
         )
     ]
 
@@ -113,9 +113,9 @@ def seed_database():
     books = [
         Book(
         title='Test Book',
-        genre_id=genres[0].id,
+        genre=genres[0],
         page_count=120,
-        format_id=formats[0].id,
+        format=formats[0],
         )
     ]
 
