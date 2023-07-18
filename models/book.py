@@ -17,7 +17,7 @@ class Book(db.Model):
     format = db.relationship('Format', back_populates='books')
 
 class BookSchema(ma.Schema):
-    genre = fields.Nested('GenreSchema')
+    genre = fields.Nested('GenreSchema', exclude=['id'])
     format = fields.Nested('FormatSchema')
     user = fields.Nested('UserSchema', only=['name', 'email'])
 

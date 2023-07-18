@@ -10,7 +10,7 @@ from controllers.movie_controller import movies_bp
 def create_app():
     app = Flask(__name__)
 
-    app.json.sort_keys = False
+    app.config['JSON_SORT_KEYS'] = False
 
     app.config["SQLALCHEMY_DATABASE_URI"]=os.environ.get("DATABASE_URL")
     app.config["JWT_SECRET_KEY"]=os.environ.get("JWT_SECRET_KEY")
