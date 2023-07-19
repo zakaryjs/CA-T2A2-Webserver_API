@@ -5,7 +5,7 @@ from models.collection import Collection, collection_schema, collections_schema
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from controllers.book_controller import authorise_admin
 
-collections_bp = Blueprint('controllers', __name__, url_prefix='/controllers')
+collections_bp = Blueprint('collections', __name__, url_prefix='/collections')
 
 @collections_bp.route('/')
 def get_all_collections():
@@ -27,6 +27,7 @@ def get_one_controller(id):
 def create_collection():
     json_data = collection_schema.load(request.get_json)
     collection = Collection(
+        name=json_data.get('name'),
         user=get_jwt_identity()
     )
     db.session.add(collection)
