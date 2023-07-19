@@ -53,6 +53,15 @@ def seed_database():
         ),
         Format(
         format='Graphic Novel'
+        ),
+        Format(
+        format='DVD'
+        ),
+        Format(
+        format='Blu-ray'
+        ),
+        Format(
+        format='Ultra HD Blu-ray (4K UHD)'
         )
     ]
 
