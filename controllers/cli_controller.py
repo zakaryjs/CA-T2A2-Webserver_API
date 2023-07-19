@@ -106,7 +106,8 @@ def seed_database():
         genre=genres[0],
         run_time=120,
         format=formats[0],
-        collection=collections[0]
+        collection=collections[0],
+        user=users[0]
         )
     ]
 
@@ -118,7 +119,8 @@ def seed_database():
         genre=genres[0],
         page_count=120,
         format=formats[0],
-        collection=collections[0]
+        collection=collections[0],
+        user=users[0]
         )
     ]
 

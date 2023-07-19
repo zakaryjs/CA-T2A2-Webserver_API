@@ -19,7 +19,7 @@ class CollectionSchema(ma.Schema):
     books = fields.List(fields.Nested('BookSchema'))
 
     class Meta:
-        fields = ('id', 'name', 'user', 'movie', 'book')
+        fields = ('id', 'user', 'name', 'user', 'movie', 'book')
 
 collection_schema = CollectionSchema()
 collections_schema = CollectionSchema(many=True)

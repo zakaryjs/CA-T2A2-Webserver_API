@@ -11,6 +11,8 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, default=False)
 
     collections = db.relationship('Collection', back_populates='user', cascade='all, delete')
+    books = db.relationship('Book', back_populates='user')
+    movies = db.relationship('Movie', back_populates='user')
 
 class UserSchema(ma.Schema):
     collections = fields.List(fields.Nested('CollectionSchema'))

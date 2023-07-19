@@ -7,7 +7,8 @@ class Movie(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String)
     run_time = db.Column(db.Integer)
-
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
     format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
@@ -15,14 +16,16 @@ class Movie(db.Model):
     collection = db.relationship('Collection', back_populates='movies', cascade='all, delete')
     genre = db.relationship('Genre', back_populates='movies')
     format = db.relationship('Format', back_populates='movies')
+    user = db.relationship('User', back_populates='movies')
 
 class MovieSchema(ma.Schema):
+    user = fields.Nested('UserSchema', only=['name', 'email'])
     genre = fields.Nested('GenreSchema', exclude=['id'])
     format = fields.Nested('FormatSchema')
     collection = fields.Nested('CollectionSchema')
 
     class Meta:
-        fields = ('id', 'title', 'genre', 'run_time', 'format', 'collection')
+        fields = ('id', 'user', 'title', 'genre', 'run_time', 'format', 'collection')
         ordered = True
 
 movie_schema = MovieSchema()

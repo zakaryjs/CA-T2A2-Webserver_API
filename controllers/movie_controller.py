@@ -31,7 +31,8 @@ def create_movie():
         genre_id=json_data.get('genre_id'),
         run_time=json_data.get('run_time'),
         format_id=json_data.get('format_id'),
-        collection_id=json_data.get('collection_id')
+        collection_id=json_data.get('collection_id'),
+        user_id=get_jwt_identity()
     )
     db.session.add(movie)
     db.session.commit()
