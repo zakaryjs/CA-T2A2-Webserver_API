@@ -30,13 +30,13 @@ def get_one_book(id):
 @books_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_book():
-    json_data = book_schema.load(request.get_json())
+    json_data = request.get_json()
     book = Book(
         title=json_data.get('title'),
-        genre=json_data.get('genre'),
+        genre_id=json_data.get('genre_id'),
         page_count=json_data.get('page_count'),
-        format=json_data.get('format'),
-        user_id=get_jwt_identity()
+        format_id=json_data.get('format_id'),
+        collection_id=json_data.get('collection_id')
     )
     db.session.add(book)
     db.session.commit()

@@ -25,13 +25,13 @@ def get_one_movie(id):
 @movies_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_movie():
-    json_data = movie_schema.load(request.get_json)
+    json_data = request.get_json()
     movie = Movie(
         title=json_data.get('title'),
-        genre=json_data.get('genre'),
+        genre_id=json_data.get('genre_id'),
         run_time=json_data.get('run_time'),
-        format=json_data.get('format'),
-        user_id=get_jwt_identity()
+        format_id=json_data.get('format_id'),
+        collection_id=json_data.get('collection_id')
     )
     db.session.add(movie)
     db.session.commit()
