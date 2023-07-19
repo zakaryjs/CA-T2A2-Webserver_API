@@ -25,10 +25,10 @@ def get_one_controller(id):
 @collections_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_collection():
-    json_data = collection_schema.load(request.get_json)
+    json_data = collection_schema.load(request.get_json())
     collection = Collection(
         name=json_data.get('name'),
-        user=get_jwt_identity()
+        user_id=get_jwt_identity()
     )
     db.session.add(collection)
     db.session.commit()
