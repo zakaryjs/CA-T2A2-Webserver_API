@@ -6,6 +6,8 @@ from controllers.auth_controller import authentication_blueprint
 from controllers.book_controller import books_bp
 from controllers.collection_controller import collections_bp
 from controllers.movie_controller import movies_bp
+from controllers.genre_controller import genres_bp
+from controllers.format_controller import formats_bp
 
 def create_app():
     app = Flask(__name__)
@@ -26,5 +28,7 @@ def create_app():
     app.register_blueprint(books_bp)
     app.register_blueprint(collections_bp)
     app.register_blueprint(movies_bp)
+    app.register_blueprint(genres_bp)
+    app.register_blueprint(formats_bp)
 
     return app
