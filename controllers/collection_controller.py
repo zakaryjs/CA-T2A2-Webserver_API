@@ -1,4 +1,4 @@
-from init import db, bcrypt
+from init import db
 from flask import Blueprint, request
 from models.user import User
 from models.collection import Collection, collection_schema, collections_schema

@@ -1,6 +1,6 @@
 from init import db, ma
-from marshmallow import fields, validates
-from marshmallow.validate import Length, And, Regexp, Range, OneOf
+from marshmallow import fields
+from marshmallow.validate import Length, And, Regexp, Range
 
 VALID_FORMATS = (1, 2, 3, 4, 5)
 
