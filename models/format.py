@@ -1,5 +1,6 @@
 from init import db, ma
 
+# define format model for database
 class Format(db.Model):
     __tablename__ = 'formats'
 
@@ -9,6 +10,7 @@ class Format(db.Model):
     movies = db.relationship('Movie', back_populates=('format'))
     books = db.relationship('Book', back_populates=('format'))
 
+# define marshmallow schema to serialise data
 class FormatSchema(ma.Schema):
     class Meta:
         fields = ('id', 'format')

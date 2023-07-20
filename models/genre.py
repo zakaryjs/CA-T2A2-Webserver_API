@@ -1,5 +1,6 @@
 from init import db, ma
 
+# define genre model for database
 class Genre(db.Model):
     __tablename__ = 'genres'
 
@@ -9,6 +10,7 @@ class Genre(db.Model):
     movies = db.relationship('Movie', back_populates=('genre'))
     books = db.relationship('Book', back_populates=('genre'))
 
+# define marshmallow schema to serialise data
 class GenreSchema(ma.Schema):
     class Meta:
         fields = ('id', 'genre')
