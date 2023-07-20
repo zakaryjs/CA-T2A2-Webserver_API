@@ -62,7 +62,7 @@ def update_one_book(id):
     stmt = db.select(Book).filter_by(id=id)
     book = db.session.scalar(stmt)
     if book:
-        if str(book.user_id) != get_jwt_identity:
+        if str(book.user_id) != get_jwt_identity():
             return {'error': 'You must be the owner of the book in order to edit it.'}, 403
         book.title = json_data.get('title') or book.title
         book.genre = json_data.get('genre') or book.genre

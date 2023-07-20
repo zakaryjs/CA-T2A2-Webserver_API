@@ -58,7 +58,7 @@ def update_one_movie(id):
     stmt = db.select(Movie).filter_by(id=id)
     movie = db.session.scalar(stmt)
     if movie:
-        if str(movie.user_id) != get_jwt_identity:
+        if str(movie.user_id) != get_jwt_identity():
             return {'error': 'You must be the owner of the movie in order to edit it.'}, 403
         movie.title = json_data.get('title') or movie.title
         movie.genre = json_data.get('genre') or movie.genre
