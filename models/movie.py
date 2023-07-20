@@ -1,5 +1,6 @@
 from init import db, ma
 from marshmallow import fields
+from marshmallow.validate import Length, And, Regexp, Range
 
 class Movie(db.Model):
     __tablename__ = 'movies'
@@ -23,6 +24,15 @@ class MovieSchema(ma.Schema):
     genre = fields.Nested('GenreSchema', exclude=['id'])
     format = fields.Nested('FormatSchema', exclude=['id'])
     collection = fields.Nested('CollectionSchema', exclude=['movies', 'books'])
+
+    title = fields.String(required=True, validate=And(
+        Length(min=2, error='The title of a movie must be at least 2 characters long.'),
+        Regexp('^[a-zA-Z0-9 ]+$', error='Only letters, numbers, and spaces are allowed in movie titles.')
+    ))
+
+    run_time = fields.Integer(required=True, validate=[Range(min=1, error="A movies run time must be greater than zero.")])
+
+    format_id = fields.Integer(validate=[Range(min=6, max=8, error="A movie must belong to a movie based format.")])
 
     class Meta:
         fields = ('id', 'user', 'title', 'genre', 'run_time', 'format', 'collection')
