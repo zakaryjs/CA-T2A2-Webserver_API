@@ -21,8 +21,8 @@ class Movie(db.Model):
 class MovieSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
     genre = fields.Nested('GenreSchema', exclude=['id'])
-    format = fields.Nested('FormatSchema')
-    collection = fields.Nested('CollectionSchema')
+    format = fields.Nested('FormatSchema', exclude=['id'])
+    collection = fields.Nested('CollectionSchema', exclude=['movies', 'books'])
 
     class Meta:
         fields = ('id', 'user', 'title', 'genre', 'run_time', 'format', 'collection')

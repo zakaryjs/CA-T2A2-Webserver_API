@@ -12,6 +12,7 @@ class Format(db.Model):
 class FormatSchema(ma.Schema):
     class Meta:
         fields = ('id', 'format')
+        ordered = True
 
 format_schema = FormatSchema()
 formats_schema = FormatSchema(many=True)

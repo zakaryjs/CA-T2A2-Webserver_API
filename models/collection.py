@@ -15,11 +15,12 @@ class Collection(db.Model):
 
 class CollectionSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
-    movies = fields.List(fields.Nested('MovieSchema'))
-    books = fields.List(fields.Nested('BookSchema'))
+    movies = fields.List(fields.Nested('MovieSchema', only=['id', 'title']))
+    books = fields.List(fields.Nested('BookSchema', only=['id', 'title']))
 
     class Meta:
-        fields = ('id', 'user', 'name', 'user', 'movie', 'book')
+        fields = ('id', 'name', 'user', 'movies', 'books')
+        ordered = True
 
 collection_schema = CollectionSchema()
 collections_schema = CollectionSchema(many=True)

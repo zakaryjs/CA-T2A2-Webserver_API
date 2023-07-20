@@ -21,11 +21,11 @@ class Book(db.Model):
 class BookSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
     genre = fields.Nested('GenreSchema', exclude=['id'])
-    format = fields.Nested('FormatSchema')
-    collection = fields.Nested('CollectionSchema')
+    format = fields.Nested('FormatSchema', exclude=['id'])
+    collection = fields.Nested('CollectionSchema', exclude=['movies', 'books'])
 
     class Meta:
-        fields = ('id', 'title', 'genre', 'page_count', 'format', 'collection')
+        fields = ('id', 'user', 'title', 'genre', 'page_count', 'format', 'collection')
         ordered = True
 
 book_schema = BookSchema()
