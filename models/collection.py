@@ -1,5 +1,6 @@
 from init import db, ma
-from marshmallow import fields
+from marshmallow import fields, validates
+from marshmallow.validate import Length, And, Regexp
 
 class Collection(db.Model):
     __tablename__ = 'collections'
@@ -17,6 +18,11 @@ class CollectionSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
     movies = fields.List(fields.Nested('MovieSchema', only=['id', 'title']))
     books = fields.List(fields.Nested('BookSchema', only=['id', 'title']))
+
+    name = fields.String(required=True, validate=And(
+        Length(min=2, error='The name of a collection must be at least two characters long.'),
+        Regexp('^[a-zA-Z0-9 ]+$', error='Only letters, numbers, and spaces are allowed in collection names.')
+    ))
 
     class Meta:
         fields = ('id', 'name', 'user', 'movies', 'books')
