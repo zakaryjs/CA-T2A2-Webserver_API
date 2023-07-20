@@ -35,7 +35,7 @@ class MovieSchema(ma.Schema):
     format_id = fields.Integer(validate=[Range(min=6, max=8, error="A movie must belong to a movie based format.")])
 
     class Meta:
-        fields = ('id', 'user', 'title', 'genre', 'run_time', 'format', 'collection')
+        fields = ('id', 'user', 'title', 'genre', 'run_time', 'format', 'collection', 'collection_id', 'genre_id', 'format_id', 'user_id')
         ordered = True
 
 movie_schema = MovieSchema()

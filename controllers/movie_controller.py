@@ -25,7 +25,7 @@ def get_one_movie(id):
 @movies_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_movie():
-    json_data = request.get_json()
+    json_data = movie_schema.load(request.get_json())
     movie = Movie(
         title=json_data.get('title'),
         genre_id=json_data.get('genre_id'),

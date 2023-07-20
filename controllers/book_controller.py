@@ -30,7 +30,7 @@ def get_one_book(id):
 @books_bp.route('/', methods=['POST'])
 @jwt_required()
 def create_book():
-    json_data = request.get_json()
+    json_data = book_schema.load(request.get_json())
     book = Book(
         title=json_data.get('title'),
         genre_id=json_data.get('genre_id'),

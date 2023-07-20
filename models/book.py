@@ -37,7 +37,7 @@ class BookSchema(ma.Schema):
     format_id = fields.Integer(validate=[Range(min=1, max=5, error="A book must belong to a book based format.")])
 
     class Meta:
-        fields = ('id', 'user', 'title', 'genre', 'page_count', 'format', 'collection')
+        fields = ('id', 'user', 'title', 'genre', 'page_count', 'format', 'collection', 'collection_id', 'genre_id', "format_id', 'user_id'")
         ordered = True
 
 book_schema = BookSchema()
