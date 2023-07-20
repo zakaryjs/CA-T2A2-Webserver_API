@@ -1,5 +1,6 @@
 from init import db, ma
 from marshmallow import fields
+from marshmallow.validate import Length, And, Regexp, Range, OneOf
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -16,6 +17,16 @@ class User(db.Model):
 
 class UserSchema(ma.Schema):
     collections = fields.List(fields.Nested('CollectionSchema'))
+
+    name = fields.String(required=True, validate=And(
+        Length(min=2, error='The name of a user must be at least two characters long.'),
+        Regexp('^[a-zA-Z0-9 ]+$', error='Only letters, numbers, and spaces are allowed in user names.')
+    ))
+
+    email = fields.String(required=True, validate=And(
+        Length(min=2, error='A users email must be at least two characters long.'),
+        Regexp('^[a-zA-Z0-9 ]+$', error='Only letters, numbers, and spaces are allowed in emails.')
+    ))
     
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin')
