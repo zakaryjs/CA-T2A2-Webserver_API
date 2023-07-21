@@ -93,6 +93,8 @@ Another aspect of this problem is that a user may become overwhelmed by the idea
 
 ### R3: Why have you chosen this database system. What are the drawbacks compared to others?
 
+*
+
 ### R4: Identify and discuss the key functionalities and benefits of an ORM
 
 ### R5: Document all endpoints for your API
