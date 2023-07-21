@@ -9,6 +9,65 @@
 
 ## Installation and Setup
 
+Requirements:
+
+- [Python 3](https://www.python.org/downloads/)
+
+- [PostgreSQL](https://www.postgresql.org/download/)
+
+- [This Repository (application source code)](https://github.com/zakaryjs/T2A2-Webserver_API) - You can either clone this by typing ```git clone git@github.com:zakaryjs/T2A2-Webserver_API.git``` inside of a terminal window, or download it directly from GitHub by clicking the green `Code` button, and then clicking `Download ZIP`.
+
+Once you have ensured that these requirements are installed:
+
+**PSQL SETUP**
+
+1. Open a new CLI/Terminal window.
+
+2. Enter ```psql``` into the terminal window
+
+3. Depending on the selected authentication method, you may need to login.*
+
+4. Create a new user, for the database: ```CREATE USER media_user WITH PASSWORD 'media_password';```
+
+5. Create a new database: ```CREATE DATABASE media_management_db;```
+
+6. Grant all permissions for the new database to the new user: ```GRANT ALL PRIVILEGES ON DATABASE media_management_db TO media_user;```
+
+7. Connect to the database: ```\c media_management_db;```
+
+**FLASK APP SETUP**
+
+1. Open the the cloned/downloaded repository folder.
+
+2. Rename the `.env.sample` file to `.env` and enter the database connection URL and the secret key:
+
+```DATABASE_URL="postgresql+psycopg2://media_user:mediapassword@localhost:5432/media_management_db"```
+
+```JWT_SECRET_KEY="placeholdersecretkey"```
+
+3. Open a terminal window inside of the repository folder and create a new virtual environment and install the requirements:
+
+`python3 -m venv .venv`
+
+`source .venv/bin/activate`
+
+`pip install -r requirements.txt`
+
+4. Use the create and seed db commands to create the database tables and seed example entries for each table:
+
+`flask db create`
+
+`flask db seed`
+
+5. If you wish to delete the tables, simply enter the drop command:
+
+`flask db drop`
+
+6. Run the Flask application, in order to start the server:
+
+`flask run`
+
+7. To access different parts of the server, it is best to use an API development platform such as [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/) in order to be able to send the required ``GET``, ``POST``, ``PUT``/``PATCH`` and ``DELETE`` ``http methods``. The server can be accessed by the URL ```localhost:8080```.
 
 
 <hr>
