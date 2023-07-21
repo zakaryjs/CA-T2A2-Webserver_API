@@ -83,6 +83,8 @@ Once you have ensured that these requirements are installed:
 
 ### R1: Identification of the problem you are trying to solve by building this particular app.
 
+The problem that I am trying to solve with this app is an organisational problem. For most types of media, whether that be music, film or books - there is a digital format available. Whether it be for convenience purposes, or space purposes, or solely due to preference, digital formats are now more popular than physical. These items are then downloaded, and then automatically organised onto your device. Physical media doesn't get this luxury. It is instead up to the owner to organise their items as they would please. This API takes books and movies and organises them according to their respective genres, formats and either run time/page count. 
+
 ### R2: Why is it a problem that needs solving?
 
 ### R3: Why have you chosen this database system. What are the drawbacks compared to others?
