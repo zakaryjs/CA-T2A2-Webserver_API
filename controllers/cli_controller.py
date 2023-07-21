@@ -11,17 +11,20 @@ database_commands = Blueprint('db', __name__)
 
 @database_commands.cli.command('create')
 def create_database():
+    '''This function creates the database tables based on the models inside of the /models folder - User, Book, Collection, Format, Genre and Movie'''
     db.create_all()
-    print("Tables have been created.")
+    print("Tables have been created.") # print this message once tables have been created
 
 @database_commands.cli.command('drop')
 def drop_database():
+    '''This function deletes, or drops the database and its tables, along with all related data at the request of the user'''
     db.drop_all()
-    print("Tables have been dropped.")
+    print("Tables have been dropped.") # print this message once database has been dropped
 
 @database_commands.cli.command('seed')
 def seed_database():
-    users = [
+    '''This function seeds the created database with placeholder pieces of data for all models in the database'''
+    users = [ # seeds with users, one admin, one non-admin
         User(
         name='Admin 1',
         email='admin1@admin.com',
@@ -38,7 +41,7 @@ def seed_database():
     db.session.add_all(users)
     db.session.commit()
 
-    formats = [
+    formats = [ # seeds with formats for both movies and books
         Format(
         format='Paperback'
         ),
@@ -67,7 +70,7 @@ def seed_database():
 
     db.session.add_all(formats)
 
-    genres = [
+    genres = [ # seeds with genres, applicable to both books and movies
         Genre(
         genre='Action'
         ),
@@ -99,7 +102,7 @@ def seed_database():
 
     db.session.add_all(genres)
 
-    collections = [
+    collections = [ # seeds with example collection, belonging to admin user
         Collection(
         name='Test Collection',
         user=users[0]
@@ -109,7 +112,7 @@ def seed_database():
     db.session.add_all(collections)
     db.session.commit()
 
-    movies = [
+    movies = [ # seeds example movie
         Movie(
         title='Test Movie',
         genre=genres[0],
@@ -122,7 +125,7 @@ def seed_database():
 
     db.session.add_all(movies)
 
-    books = [
+    books = [ # seeds example book
         Book(
         title='Test Book',
         genre=genres[0],
@@ -136,4 +139,4 @@ def seed_database():
     db.session.add_all(books)
     db.session.commit()
 
-    print("Tables have been seeded.")
+    print("Tables have been seeded.") # print this message once all tables have been seeded
