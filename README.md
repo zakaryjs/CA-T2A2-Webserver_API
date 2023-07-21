@@ -1,4 +1,10 @@
 # T2A2 - API Webserver Project
+
+**Project Stack**
+
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white) ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+![1.3.0](https://img.shields.io/github/last-commit/zakaryjs/T2A2-Webserver_API)
 <hr>
 
 ## Important Links
