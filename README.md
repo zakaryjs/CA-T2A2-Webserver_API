@@ -87,6 +87,10 @@ The problem that I am trying to solve with this app is an organisational problem
 
 ### R2: Why is it a problem that needs solving?
 
+This problem needs solving as it is too easy to lose track of what media you may own. A person may end up owning large amounts of physical media and having to store different items in different places, which would eventually lead to different types of physical media, such as books and movies, being unorganised. Having a database such as the flask database inside of this repository allows a user to add a piece of media to the database, and then, if they wanted to, store it, as it has now been permanently stored inside a collection in the database.
+
+Another aspect of this problem is that a user may become overwhelmed by the idea of having to sort through their media to find a certain book/movie, and as such may stick to just rereading or rewatching specific books or movies, failing to take advantage of the pieces of media they own.
+
 ### R3: Why have you chosen this database system. What are the drawbacks compared to others?
 
 ### R4: Identify and discuss the key functionalities and benefits of an ORM
