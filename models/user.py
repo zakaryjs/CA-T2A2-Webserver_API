@@ -1,6 +1,6 @@
 from init import db, ma
 from marshmallow import fields
-from marshmallow.validate import Length, And, Regexp
+from marshmallow.validate import Length, And, Regexp, Email
 
 # define user model for database
 class User(db.Model):
@@ -28,10 +28,9 @@ class UserSchema(ma.Schema):
     ))
 
     # email field validation, minimum 2 characters and select characters only
-    email = fields.String(required=True, validate=And(
-        Length(min=2, error='A users email must be at least two characters long.'),
-        Regexp('^[a-zA-Z0-9 ]+$', error='Only letters, numbers, and spaces are allowed in emails.')
-    ))
+    email = fields.String(required=True, validate=Email)
+
+    password = fields.String(validate=Length(min=6))
     
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin')
