@@ -93,7 +93,25 @@ Another aspect of this problem is that a user may become overwhelmed by the idea
 
 ### R3: Why have you chosen this database system. What are the drawbacks compared to others?
 
-*
+The database system that I chose to use for this assignment is PostgreSQL. I chose this database system as it is what I am familiar with.
+
+**Advantages**
+
+Postgres has many features that allow for the database to be reliable, keep strong data integrity, and be easily scalable. Postgres also has extensive documentation available online, which made troubleshooting much easier.
+
+Postgres is also fully ACID compliant, which further helps enforce and ensure data integrity and reliability. This assists for those databases with CRUD functionality in mind, ensuring that data is able to be created, modified, viewed and deleted without issue.
+
+Postgres also supports a wide variety of data types, resulting in an overall wider range of use cases for potential applications. Furthermore, users can also define their own parameters in regards to the relations, datatypes, or the database itself, allowing for functionality to be further specialised for its particular use.
+
+Lastly, Postgres is Open-Source, meaning that developers are able to modify parts of the code as required.
+
+**Disadvantages**
+
+From a performance based perspective, Postgres, in most scenarios, is slower than other alternatives such as MySQL. This is more apparent in bigger databases, due to the way that Postgres handles reading operations. This is due to the fact that Postgres was designed with compatibility and integrity as a key focus, meaning that though Postgres is more feature rich, its performance takes a hit; more noticably at a larger scale.
+
+Postgres also has less third party support when compared with other database management systems. This results in less extensive function in comparison to others such as MySQL, which has more third party support, a larger community, and more trained professionals available.
+
+Postgres is also more complicated in regards to the setup, which creates a larger barrier for entry, leading to the overall experience being less beginner-friendly.
 
 ### R4: Identify and discuss the key functionalities and benefits of an ORM
 
@@ -108,3 +126,5 @@ Another aspect of this problem is that a user may become overwhelmed by the idea
 ### R9: Discuss the database relations to be implemented in your application
 
 ### R10: Describe the way tasks are allocated and tracked in your project
+
+[Trello Board](https://trello.com/invite/b/LaCoYbLG/ATTI530e5c791577751ea1a95fcc9be416a1B3DB7C3C/t2a2-webserver-api)
