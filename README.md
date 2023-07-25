@@ -115,9 +115,229 @@ Postgres is also more complicated in regards to the setup, which creates a large
 
 ### R4: Identify and discuss the key functionalities and benefits of an ORM
 
+ORM stands for Object Relational Mapping. An ORM is a way for an application to interact with a database. 
+
+ORMs use a programming language, instead of plain SQL, for database related commands, making it easier to create queries, and modify the entirety of the database. This also means that developers dont have to constantly switch between writing SQL, and for example, Python, and can just write in the one language. 
+
+ORMs allow for developers to use the object oriented functions of their chosen programming language. This means that knowledge from the functions of a specific programming language can be applied in the creation of database relations, relationships and validation paramaters. 
+
+Furthermore, ORMS have strong support for most SQL tasks. The ORM that is used in this application, SQLAlchemy, makes it easy to create, seed and drop databases. It is also really easy to change which database the application is connected to; this can be done by simply modifying the .env file.
+
 ### R5: Document all endpoints for your API
 
+Endpoint documentation should include:
+HTTP request verb
+Required data where applicable 
+Expected response data 
+Authentication methods where applicable
+
+#### <u>Authentication Used</u>
+
+**authorise_admin (admin_status)**
+- Is used to check whether or not a user has admin permissions.
+- Admin permissions are required in order to delete things from the database; collections, books, movies.
+- This function uses get_jwt_identity in order to get the users JWT token which is used to check whether is_admin is set to true for the specific user.
+
+#### <u>Users (auth controller)</u>
+
+##### /register
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Name (string) - must be at least 2 characters long and follow Regexp paramater
+- Email (string) - must be in valid email format
+- Password (string) - must be at least 6 characters long (is encrypted with bcrypt before stored in database)
+
+**Expected Response:**
+If successful the route will return the users ID, name, email, and admin status in JSON format.
+- If the users email is not unique, an IntegrityError will be returned, accompanied with an error message.
+- If a field is missing, an IntegrityError will be returned, accompanied with an error message specifying that the field must not be empty.
+- If a field fails validation, a ValidationError will be returned, accompanied with an error message.
+
+**Authorisation Methods:**
+None
+
+##### /login
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Email (string)
+- Password (string)
+
+**Expected Response:**
+If the login is successful, the route will return a login successful message, with the users name, email, a JWT authentication token, and the users current admin status.
+- If the user enters the wrong login information, an error will be returned stating this.
+
+**Authorisation Methods:**
+None
+
+#### <u>Collections</u>
+
+##### /collections
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, a list of all collections inside of the database will be returned in JSON format, in descending order. If there are any movies or books that belong to the collection, these will be returned, nested inside of the response.
+
+- ID
+- Name
+- User who created the collection
+- Movies
+- Books
+
+**Authorisation Methods:**
+None
+
+##### /collections/<int:id>
+**HTTP Request Method:** GET
+
+**Required Data:**
+The ID of the collection that the user is searching for.
+
+**Expected Response:**
+If the request is successful, the collection inside of the database that matches the requested ID will be returned in JSON format. If there are any movies or books that belong to the collection, these will be returned, nested inside of the response.
+
+**Authorisation Methods:**
+None
+
+##### /collections
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Name (string)
+- User ID (jwt token)
+
+**Expected Response:**
+If the request is successful, the collections ID, name, and the user who created it will be returned.
+- If a name is missing, or does not succeed in validation, a ValidationError will be returned, accompanied with a message.
+- If there is no JWT token, "msg": "Missing Authorization Header" will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+##### /collections/<int:id>
+**HTTP Request Method:** DELETE
+
+**Required Data:**
+The ID of the collection that the user wishes to delete. 
+
+**Expected Response:**
+If the request is successful, a message is returned stating that the collection has been successfully deleted.
+- If the user does not have admin privileges, an error message is returned.
+- If a collection with the requested ID does not exist, an error message is returned.
+
+**Authorisation Methods:**
+authorise_admin
+
+#### <u>Books</u>
+
+##### /books
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, a list of all books inside of the database will be returned in JSON format, in descending order. The collection, genre, format and user that the books belong to will be returned in nested schemas.
+
+- ID
+- User
+- Title
+- Genre
+- Page_count
+- Format
+- Collection
+
+**Authorisation Methods:**
+None
+
+##### /books/<int:id>
+**HTTP Request Method:** GET
+
+**Required Data:**
+The ID of the book the user is searching for.
+
+**Expected Response:**
+If the request is successful, the book inside of the database that matches the requested ID will be returned in JSON format. The collection, genre, format and user that the book belongs to will be returned in nested schemas.
+
+**Authorisation Methods:**
+None
+
+##### /books
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Title (string)
+- Genre_id (integer)
+- Page_count (integer)
+- Format_id (integer)
+- Collection_id (integer)
+- User_id (JWT Token)
+
+**Expected Response:**
+If the request is successful, the books ID, title, the user who created it, page count, genre, format and the collection it belongs to will be returned.
+- If a name is missing, or does not succeed in validation, a ValidationError will be returned, accompanied with a message.
+- If there is no JWT token, "msg": "Missing Authorization Header" will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+##### /books/<int:id>
+**HTTP Request Method:** DELETE
+
+**Required Data:**
+The ID of the book that the user wants to delete.
+
+**Expected Response:**
+If the request is successful, a message is returned stating that the book has been successfully deleted.
+- If the user does not have admin privileges, an error message is returned.
+- If a book with the requested ID does not exist, an error message is returned.
+
+**Authorisation Methods:**
+authorise_admin
+
+##### /books/<int:id>
+**HTTP Request Method:** PUT, PATCH
+
+**Required Data:**
+The ID of the book that the user wants to update.
+At least one of the following:
+- Title (string)
+- Genre_id (integer)
+- Page_count (integer)
+- Format_id (integer)
+- Collection_id (integer)
+
+**Expected Response:**
+If the request is successful, the books ID, title, the user who created it, page count, genre, format and the collection it belongs to will be returned.
+- If the user trying to edit the book didn't create the book, an error message will be returned.
+If a book with the requested ID doesn't exist, an error message will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+#### <u>Movies</u>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### R6: An ERD for your app
+
+
 
 ### R7: Detail any third party services that your app will use
 

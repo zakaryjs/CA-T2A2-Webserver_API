@@ -47,6 +47,6 @@ def delete_one_collection(id):
     stmt = db.select(Collection).filter_by(id) # filter collections by ID to find the requested collection
     collection = db.session.scalar(stmt)
     if collection:
-        return {'error': f'Collection {collection.id} has been deleted succesfully.'} # if collection is found, return this message
+        return {'message': f'Collection {collection.id} has been deleted succesfully.'} # if collection is found, return this message
     else:
         return {'error': f'A collection with the id {id} does not exist.'}, 404 # if collection is not found, return this error message
