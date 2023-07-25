@@ -51,6 +51,8 @@ def delete_one_movie(id):
     stmt = db.select(Movie).filter_by(id) # filter movies by the id to find specific movie
     movie = db.session.scalar(stmt)
     if movie:
+        db.session.delete(movie)
+        db.session.commit()
         return {'error': f'Movie {movie.title} has been deleted succesfully.'} # if movie has been found and user has admin permissions, drop movie from database
     else:
         return {'error': f'A movie with the id {id} does not exist.'}, 404 # if movie not found return this error message

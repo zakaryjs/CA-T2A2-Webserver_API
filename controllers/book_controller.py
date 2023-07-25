@@ -57,6 +57,8 @@ def delete_one_book(id):
     stmt = db.select(Book).filter_by(id) # filter books by the id to find specific book
     book = db.session.scalar(stmt)
     if book:
+        db.session.delete(book)
+        db.session.commit()
         return {'message': f'Book {book.title} has been deleted succesfully.'} # if book has been found and user has admin permissions, drop book from database
     else:
         return {'error': f'A book with the id {id} does not exist.'}, 404 # if book not found return this error message
