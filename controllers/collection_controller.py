@@ -50,3 +50,17 @@ def delete_one_collection(id):
         return {'message': f'Collection {collection.id} has been deleted succesfully.'} # if collection is found, return this message
     else:
         return {'error': f'A collection with the id {id} does not exist.'}, 404 # if collection is not found, return this error message
+    
+@collections_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
+@jwt_required()
+def update_one_collection(id):
+    json_data = collection_schema.load(request.get_json(), partial=True)
+    stmt = db.select(Collection).filter_by(id=id)
+    collection = db.session.scalar(stmt)
+    if collection:
+        if str(collection.user_id) != get_jwt_identity():
+            return {'error': 'You must be the owner of the collection in order to edit it.'}, 403 # if collection is found and user ID does not match the jwt, return this error message
+        collection.name = json_data.get('name') or collection.name
+        return collection_schema.dump(collection) # return edited collection to user
+    else:
+        return {'error': f'A collection with the id {id} does not exist.'}, 404 # if collection is not found return this error message
