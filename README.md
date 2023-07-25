@@ -321,16 +321,104 @@ JWT Token
 
 #### <u>Movies</u>
 
+##### /movies
+**HTTP Request Method:** GET
 
+**Required Data:**
+None
 
+**Expected Response:**
+If the request is successful, a list of all movies inside of the database will be returned in JSON format, in descending order. The collection, genre, format and user that the movies belong to will be returned in nested schemas.
 
+- ID
+- User
+- Title
+- Genre
+- Run_time
+- Format
+- Collection
 
+**Authorisation Methods:**
+None
 
+##### /movies/<int:id>
+**HTTP Request Method:** GET
 
+**Required Data:**
+The ID of the movie the user is searching for.
 
+**Expected Response:**
+If the request is successful, the movie inside of the database that matches the requested ID will be returned in JSON format. The collection, genre, format and user that the movie belongs to will be returned in nested schemas.
 
+**Authorisation Methods:**
+None
 
+##### /movies
+**HTTP Request Method:** POST
 
+**Required Data:**
+- Title (string)
+- Genre_id (integer)
+- Run_time (integer)
+- Format_id (integer)
+- Collection_id (integer)
+- User_id (JWT Token)
+
+**Expected Response:**
+If the request is successful, the movies ID, title, the user who created it, run time, genre, format and the collection it belongs to will be returned.
+- If a name is missing, or does not succeed in validation, a ValidationError will be returned, accompanied with a message.
+- If there is no JWT token, "msg": "Missing Authorization Header" will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+##### /movies/<int:id>
+**HTTP Request Method:** DELETE
+
+**Required Data:**
+The ID of the movie that the user wants to delete.
+
+**Expected Response:**
+If the request is successful, a message is returned stating that the movie has been successfully deleted.
+- If the user does not have admin privileges, an error message is returned.
+- If a movie with the requested ID does not exist, an error message is returned.
+
+**Authorisation Methods:**
+authorise_admin
+
+##### /movies/<int:id>
+**HTTP Request Method:** PUT, PATCH
+
+**Required Data:**
+The ID of the movie that the user wants to update.
+At least one of the following:
+- Title (string)
+- Genre_id (integer)
+- Run_time (integer)
+- Format_id (integer)
+- Collection_id (integer)
+
+**Expected Response:**
+If the request is successful, the movies ID, title, the user who created it, page count, genre, format and the collection it belongs to will be returned.
+- If the user trying to edit the movie didn't create the movie, an error message will be returned.
+If a movie with the requested ID doesn't exist, an error message will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+#### <u>Formats</u>
+
+##### /formats
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, a list of all collections inside of the database will be returned in JSON format, in descending order. If there are any movies or books that belong to the collection, these will be returned, nested inside of the response.
+
+- ID
+- Name
 
 
 
