@@ -58,22 +58,19 @@ def seed_database():
         Format(
         format='Graphic Novel'
         ),
-        Format(
-        format='DVD'
-        ),
-        Format(
-        format='Blu-ray'
-        ),
-        Format(
-        format='Ultra HD Blu-ray (4K UHD)'
-        )
     ]
 
     db.session.add_all(formats)
 
     movie_formats = [
         FormatMovie(
-        format='Test'
+        format='DVD'
+        ),
+        FormatMovie(
+        format='Blu-Ray'
+        ),
+        FormatMovie(
+        format='Ultra HD Blu-ray (4K UHD)'
         )
     ]
 
