@@ -58,7 +58,7 @@ def update_one_genre(id):
     stmt = db.select(Genre).filter_by(id=id)
     genre = db.session.scalar(stmt)
     if genre:
-        genre.genre = json_data.get('genre') or genre.name
+        genre.genre = json_data.get('genre') or genre.genre
         return genre_schema.dump(genre)
     else:
         return {'error': f'A genre with the id {id} does not exist.'}, 404 # if genre is not found return this error message
