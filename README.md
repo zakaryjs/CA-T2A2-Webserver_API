@@ -232,6 +232,21 @@ If the request is successful, a message is returned stating that the collection 
 **Authorisation Methods:**
 authorise_admin
 
+##### /collections/<int:id>
+**HTTP Request Method:** PUT, PATCH
+
+**Required Data:**
+The ID of the collection that the user wants to update.
+The updated collection name. (string)
+
+**Expected Response:**
+If the request is successful, the collections ID, name, and the user who created it along with any books/movies associated with it will be returned to the user.
+- If the user trying to edit the collection didn't create the collection, an error message will be returned.
+- If a collection with the requested ID doesn't exist, an error message will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
 #### <u>Books</u>
 
 ##### /books
@@ -314,7 +329,7 @@ At least one of the following:
 **Expected Response:**
 If the request is successful, the books ID, title, the user who created it, page count, genre, format and the collection it belongs to will be returned.
 - If the user trying to edit the book didn't create the book, an error message will be returned.
-If a book with the requested ID doesn't exist, an error message will be returned.
+- If a book with the requested ID doesn't exist, an error message will be returned.
 
 **Authorisation Methods:**
 JWT Token
@@ -415,12 +430,218 @@ JWT Token
 None
 
 **Expected Response:**
-If the request is successful, a list of all collections inside of the database will be returned in JSON format, in descending order. If there are any movies or books that belong to the collection, these will be returned, nested inside of the response.
+If the request is successful, a list of all book formats inside of the database will be returned in JSON format, in descending order. 
+
+- ID
+- Format
+
+**Authorisation Methods:**
+None
+
+##### /formats/<int:id>
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, the book format corresponding to the ID inside of the database will be returned in JSON format.
 
 - ID
 - Name
 
+**Authorisation Methods:**
+None
 
+##### /formats
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Format (string)
+
+**Expected Response:**
+If the request is successful, the formats name will be returned.
+- If the format name is missing, or does not succeed in validation, a ValidationError will be returned, accompanied with a message.
+- If there is no JWT token, "msg": "Missing Authorization Header" will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+##### /formats/<int:id>
+**HTTP Request Method:** DELETE
+
+**Required Data:**
+The ID of the format that the user wants to delete.
+
+**Expected Response:**
+If the request is successful, a message is returned stating that the format has been successfully deleted.
+- If the user does not have admin privileges, an error message is returned.
+- If a format with the requested ID does not exist, an error message is returned.
+
+**Authorisation Methods:**
+authorise_admin
+
+##### /formats/<int:id>
+**HTTP Request Method:** PUT, PATCH
+
+**Required Data:**
+The ID of the format that the user wants to update.
+The new format name. (string)
+
+**Expected Response:**
+If the request is successful, the formats ID and name will be returned.
+If a format with the requested ID doesn't exist, an error message will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+#### <u>Movie Formats</u>
+
+##### /movie_formats
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, a list of all movie formats inside of the database will be returned in JSON format, in descending order. 
+
+- ID
+- Format
+
+**Authorisation Methods:**
+None
+
+##### /movie_formats/<int:id>
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, the movie format corresponding to the ID inside of the database will be returned in JSON format.
+
+- ID
+- Name
+
+**Authorisation Methods:**
+None
+
+##### /movie_formats
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Format (string)
+
+**Expected Response:**
+If the request is successful, the formats name will be returned.
+- If the format name is missing, or does not succeed in validation, a ValidationError will be returned, accompanied with a message.
+- If there is no JWT token, "msg": "Missing Authorization Header" will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+##### /movie_formats/<int:id>
+**HTTP Request Method:** DELETE
+
+**Required Data:**
+The ID of the format that the user wants to delete.
+
+**Expected Response:**
+If the request is successful, a message is returned stating that the format has been successfully deleted.
+- If the user does not have admin privileges, an error message is returned.
+- If a format with the requested ID does not exist, an error message is returned.
+
+**Authorisation Methods:**
+authorise_admin
+
+##### /movie_formats/<int:id>
+**HTTP Request Method:** PUT, PATCH
+
+**Required Data:**
+The ID of the format that the user wants to update.
+The new format name. (string)
+
+**Expected Response:**
+If the request is successful, the formats ID and name will be returned.
+If a format with the requested ID doesn't exist, an error message will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+#### <u>Genres</u>
+
+##### /genres
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, a list of all genres inside of the database will be returned in JSON format, in descending order. 
+
+- ID
+- Genre
+
+**Authorisation Methods:**
+None
+
+##### /genres/<int:id>
+**HTTP Request Method:** GET
+
+**Required Data:**
+None
+
+**Expected Response:**
+If the request is successful, the genre corresponding to the ID inside of the database will be returned in JSON format.
+
+- ID
+- Genre
+
+**Authorisation Methods:**
+None
+
+##### /genres
+**HTTP Request Method:** POST
+
+**Required Data:**
+- Genre (string)
+
+**Expected Response:**
+If the request is successful, the genres name will be returned.
+- If the genre name is missing, or does not succeed in validation, a ValidationError will be returned, accompanied with a message.
+- If there is no JWT token, "msg": "Missing Authorization Header" will be returned.
+
+**Authorisation Methods:**
+JWT Token
+
+##### /genres/<int:id>
+**HTTP Request Method:** DELETE
+
+**Required Data:**
+The ID of the genre that the user wants to delete.
+
+**Expected Response:**
+If the request is successful, a message is returned stating that the genre has been successfully deleted.
+- If the user does not have admin privileges, an error message is returned.
+- If a genre with the requested ID does not exist, an error message is returned.
+
+**Authorisation Methods:**
+authorise_admin
+
+##### /genres/<int:id>
+**HTTP Request Method:** PUT, PATCH
+
+**Required Data:**
+The ID of the genre that the user wants to update.
+The new genre name. (string)
+
+**Expected Response:**
+If the request is successful, the genres ID and name will be returned.
+If a genre with the requested ID doesn't exist, an error message will be returned.
+
+**Authorisation Methods:**
+JWT Token
 
 
 ### R6: An ERD for your app
