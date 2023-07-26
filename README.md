@@ -646,9 +646,28 @@ JWT Token
 
 ### R6: An ERD for your app
 
-
-
 ### R7: Detail any third party services that your app will use
+
+**Flask**
+Flask is a lightweight, and easily expandable web framework built for Python. Flask is designed to be easy to use, and easy to fit to any users needs. Flask makes use of the Web Server Gateway Interface in order to process the requests between a web server and the Flask app itself. It allows users to efficiently build web applications. At its core, Flask provides users with the ability to design routes, with specified HTTP requests, and allows them to associate these routes with HTML and CSS, in order to create a front end. As it is a lightweight framework, a key feature is to be able to, as mentioned above, easily expand its functionality through the use of libraries or other extensions.
+
+**Psycopg2**
+Psycopg2 is a PostgreSQL database adapter for Python, that allows for Python apps to directly connect to a PostgreSQL database. The adapter was designed for databases which perform a significant number of CRUD based operations, and as such is able to efficiently perform these operations without issue. Psycopg2 is defined to be both efficient and secure, and as such is a reliable way to connect Python applications to PSQL databases.
+
+**SQLAlchemy** 
+SQLAlchemy is an Object Relational Mapper that allows Python developers to take full advantage of the power of SQL, through an adapted language based on Python. SQLAlchemy allows developers to interact with SQL databases through the use of Python objects, which act as the data stored inside of an SQL database. Database tables are defined as classes, and nest inside them all fields of a certain table and their relationships between other tables. SQLAlchemy allows developers to perform highly sophisticated SQL queries without writing SQL itself, meaning that databases can be modified directly from the ORM.
+
+**Marshmallow**
+Marshmallow is a library that is used to both serialise and deserialise objects for use with Python and ORMs. Marshmallow is used to convert complex datatypes, including dictionaries, into the JSON format, from which they can then be used in web server APIs. Marshmallow also provides a schema functionality, which allows for validation of data, as well as deserialisation and serialisation of objects in order to ensure consistency and reliability when converting data between app-level objects and Python datatypes.
+
+**Bcrypt**
+Bcrypt is a library that uses cryptographic functions in order to securely hash, and then salt plain text, sensitive data, that results in an unreadable string. Bcrypt is designed to be slow at this process, in order to reduce the strength, severity, and speed of brute-force based attacks, in order to ensure that encrypted hashes are as secure as possible. Bcrypts abilities to prevent brute-force attacks, and compensate for future faster hardware ensure that the library will still be secure in the future.
+
+
+**JWT Token (JSON Web Token)**
+A JSON Web Token is a JSON Object which is used to reliably and securely transfer pieces of information between two destinations over the internet. JWT is often used in web apps and servers such as this Media Management API in order to verify a users identity before performing specific CRUD operations. A JWT has three parts: Header, Payload, and Signature. The header contains the type of the token (JWT), and the algorithm used for signing (eg SHA256). The Payload contains claims, which are the pieces of information that is being exchanged via the token. The signature is used to valid and ensure that the contents of the exchanged message were not modified in anyway.
+
+
 
 ### R8: Describe your projects models in terms of the relationships they have with each other
 
