@@ -823,8 +823,67 @@ The formatmovie model contains fields for a formats ID (assigned at creation of 
 
 The formatmovie model has a one to many relationship with movies - a 'Movie' back populates multiple formats.
 
-
 ### R9: Discuss the database relations to be implemented in your application
+
+There are 7 tables used in the Media Management API:
+- User
+- Collection
+- Book
+- Movie
+- Genre
+- Book Format
+- Movie Format
+
+**Table 1: User**
+
+As shown in the ERD, the User table has a one to many relationship with the Collection, Book and Movie tables. 
+
+The relationship between the User and Collection tables is established through the 'user_id' foreign key in the collection table. This key allows for the user who created the collection to have their unique user_id to be stored inside of any collection that they create.
+
+The relationship between the User, and the Book and Movie tables is established through the 'user_id' foreign key in both the book and movie table. This key allows for the user who created the collection to have their unique user_id to be stored inside of any book or movie that they create.
+
+**Table 2: Collection**
+
+As shown in the ERD, the Collection table has a many to one relationship with the User table. The Collection table also has a many to one relationship the Book and Movie tables. 
+
+The relationship between the Collection and User tables is established through the 'user_id' foreign key in the collection table. This key allows for the user who created the collection to have their unique user_id to be stored inside of any collection that they create.
+
+The relationship between the Collection, and the Book and Movie tables is established through the 'collection_id' foreign key located in both the book and movie tables. This key allows for the collection that the respective book/movie belongs to have their unique collection_id to be stored inside of any book or movie that belongs to that collection.
+
+**Table 3: Book**
+
+As shown in the ERD, the Book table has a many to one relationship with the Collection, Genre and Format tables.
+
+The relationship between the Book and Collection tables is established through the 'collection_id' foreign key located in the book table. This key allows for the collection that the respective book belongs to have their unique collection_id to be stored inside of any book that belongs to that collection.
+
+The relationship between the Book, and the Format and Genre tables is established through the 'genre_id' and 'format_id' foreign keys located in the book table. This allows for the genre/format that the book belongs to have their unique genre_id/format_id stored inside of any book that belongs to that genre/format.
+
+**Table 4: Movie**
+
+As shown in the ERD, the Movie table has a many to one relationship with the Collection, Genre and Format tables.
+
+The relationship between the Movie and Collection tables is established through the 'collection_id' foreign key located in the movie table. This key allows for the collection that the respective movie belongs to have their unique collection_id to be stored inside of any movie that belongs to that collection.
+
+The relationship between the Movie, and the Format and Genre tables is established through the 'genre_id' and 'format_id' foreign keys located in the movie table. This allows for the genre/format that the movie belongs to have their unique genre_id/format_id stored inside of any movie that belongs to that genre/format.
+
+**Table 5: Genre**
+
+As shown in the ERD, the Genre table has a one to many relationship with both the Book and Movie tables.
+
+The relationship between the Genre, and the Book and Movie tables is established through the 'genre_id' foreign key that is located in both the Book and Movie tables. This allows for the genre that the book/movie belongs to have their unique genre_id stored inside of any book/movie that belongs to that genre.
+
+**Table 6: Format (Book)**
+
+As shown in the ERD, the Format table has a one to many relationship with the Book table.
+
+The relationship between the Format, and the Book table is established through the 'format_id' foreign key that is located in the Book table. This allows for the format that the book belongs to have their unique format_id stored inside of any book that belongs to that format.
+
+**Table 7: Format (Movie)**
+
+As shown in the ERD, the FormatMovie table has a one to many relationship with the Movie table.
+
+The relationship between the FormatMovie, and the Movie table is established through the 'format_id' foreign key that is located in the Movie table. This allows for the format that the movie belongs to have their unique format_id stored inside of any movie that belongs to that format.
+
 
 ### R10: Describe the way tasks are allocated and tracked in your project
 
