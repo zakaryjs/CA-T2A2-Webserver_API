@@ -667,9 +667,162 @@ Bcrypt is a library that uses cryptographic functions in order to securely hash,
 **JWT Token (JSON Web Token)**
 A JSON Web Token is a JSON Object which is used to reliably and securely transfer pieces of information between two destinations over the internet. JWT is often used in web apps and servers such as this Media Management API in order to verify a users identity before performing specific CRUD operations. A JWT has three parts: Header, Payload, and Signature. The header contains the type of the token (JWT), and the algorithm used for signing (eg SHA256). The Payload contains claims, which are the pieces of information that is being exchanged via the token. The signature is used to valid and ensure that the contents of the exchanged message were not modified in anyway.
 
-
-
 ### R8: Describe your projects models in terms of the relationships they have with each other
+
+There are 7 models used in the Media Management API:
+- User
+- Collection
+- Book
+- Movie
+- Genre
+- Book Format
+- Movie Format
+
+**Model 1: User**
+
+```py
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    email = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+
+    collections = db.relationship('Collection', back_populates='user', cascade='all, delete')
+    books = db.relationship('Book', back_populates='user')
+    movies = db.relationship('Movie', back_populates='user')
+```
+
+The user model contains fields for a users ID (assigned at creation of new user), their name, email, password and admin status.
+
+The user model has a one to many relationship with collections - a 'Collection' back populates a single user. When a user is deleted, the model cascades, and all collections associated with it are deleted.
+The user model also has a one to many relationship with both books and movies - a multitude of books and movies can belong to a singular user.
+
+**Model 2: Collection**
+
+```py
+class Collection(db.Model):
+    __tablename__ = 'collections'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    user = db.relationship('User', back_populates='collections')
+    movies = db.relationship('Movie', back_populates='collection')
+    books = db.relationship('Book', back_populates='collection')
+```
+
+The collection model contains fields for a collections ID (assigned at creation of new collection), and the name of a collection.
+
+The collection model has a many to one relationship with users - a 'User' back populates multiple collections.
+The collection model also has a many to one relationship with both books and movies - a multitude of books and movies can belong to a singular collection.
+
+**Model 3: Book**
+
+```py
+class Book(db.Model):
+    __tablename__ = 'books'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    page_count = db.Column(db.Integer)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
+    format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
+    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
+
+    collection = db.relationship('Collection', back_populates='books', cascade='all, delete')
+    genre = db.relationship('Genre', back_populates='books')
+    format = db.relationship('Format', back_populates='books')
+    user = db.relationship('User', back_populates='books')
+```
+
+The book model contains fields for a books ID (assigned at creation of new book), the user that created the book, the title of the book, the genre, the page count, the format, and the collection that it belongs to.
+
+The book model has a many to one relationship with collections - a 'Collection' back populates multiple books.
+The book model has a many to one relationship with both genres and formats - 'Genre' and 'Format' both back populate multiple books.
+The book model has a many to one relationship with users - 'User' back populates multiple books.
+
+**Model 4: Movie**
+
+```py
+class Movie(db.Model):
+    __tablename__ = 'movies'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    run_time = db.Column(db.Integer)
+    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
+    format_id = db.Column(db.Integer, db.ForeignKey('formatsmovie.id'))
+    collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
+
+    collection = db.relationship('Collection', back_populates='movies', cascade='all, delete')
+    genre = db.relationship('Genre', back_populates='movies')
+    formatsmovie = db.relationship('FormatMovie', back_populates='movies')
+    user = db.relationship('User', back_populates='movies')
+```
+The movie model contains fields for a movies ID (assigned at creation of new movie), the user that created the movie, the title of the movie, the genre, the run time, the format, and the collection that it belongs to.
+
+The movie model has a many to one relationship with collections - a 'Collection' back populates multiple movies.
+The movie model has a many to one relationship with both genres and formatsmovies - 'Genre' and 'FormatMovie' both back populate multiple movies.
+The movie model has a many to one relationship with users - 'User' back populates multiple movies.
+
+**Model 5: Genre**
+
+```py
+class Genre(db.Model):
+    __tablename__ = 'genres'
+
+    id = db.Column(db.Integer, primary_key=True)
+    genre = db.Column(db.String)
+
+    movies = db.relationship('Movie', back_populates=('genre'))
+    books = db.relationship('Book', back_populates=('genre'))
+```
+
+The genre model contains fields for a genres ID (assigned at creation of new genre) and the genres name.
+
+The genre model has a one to many relationship with both books and movies - a 'Movie' or 'Book' back populates multiple genres.
+
+**Model 6: Format (Book)**
+
+```py
+class Format(db.Model):
+    __tablename__ = 'formats'
+
+    id = db.Column(db.Integer, primary_key=True)
+    format = db.Column(db.String)
+
+    books = db.relationship('Book', back_populates=('format'))
+```
+
+The format model contains fields for a formats ID (assigned at creation of new format) and the formats name.
+
+The format model has a one to many relationship with books - a 'Book' back populates multiple formats.
+
+**Model 7: Format (Movie)**
+
+```py
+class FormatMovie(db.Model):
+    __tablename__ = 'formatsmovie'
+
+    id = db.Column(db.Integer, primary_key=True)
+    format = db.Column(db.String)
+
+    movies = db.relationship('Movie', back_populates=('formatsmovie'))
+```
+
+The formatmovie model contains fields for a formats ID (assigned at creation of new format) and the formats name.
+
+The formatmovie model has a one to many relationship with movies - a 'Movie' back populates multiple formats.
+
 
 ### R9: Discuss the database relations to be implemented in your application
 
