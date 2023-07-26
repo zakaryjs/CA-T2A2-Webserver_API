@@ -8,6 +8,7 @@ from controllers.collection_controller import collections_bp
 from controllers.movie_controller import movies_bp
 from controllers.genre_controller import genres_bp
 from controllers.format_controller import formats_bp
+from controllers.format_movie_controller import movieformats_bp
 
 def create_app():
     app = Flask(__name__)
@@ -30,5 +31,6 @@ def create_app():
     app.register_blueprint(movies_bp)
     app.register_blueprint(genres_bp)
     app.register_blueprint(formats_bp)
+    app.register_blueprint(movieformats_bp)
 
     return app

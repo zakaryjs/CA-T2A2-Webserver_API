@@ -51,7 +51,7 @@ def delete_one_genre(id):
     else:
         return {'error': f'A genre with the id {id} does not exist.'}, 404 # if genre is not found, return this error message
     
-@genres_bp.route('/<int:id', methods=['PUT', 'PATCH'])
+@genres_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_one_genre(id):
     json_data = genre_schema.load(request.get_json(), partial=True)

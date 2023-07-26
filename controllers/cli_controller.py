@@ -6,6 +6,7 @@ from models.book import Book
 from models.format import Format
 from models.genre import Genre
 from models.movie import Movie
+from models.format_movie import FormatMovie
 
 database_commands = Blueprint('db', __name__)
 
@@ -70,6 +71,14 @@ def seed_database():
 
     db.session.add_all(formats)
 
+    movie_formats = [
+        FormatMovie(
+        format='Test'
+        )
+    ]
+
+    db.session.add_all(movie_formats)
+
     genres = [ # seeds with genres, applicable to both books and movies
         Genre(
         genre='Action'
@@ -117,7 +126,7 @@ def seed_database():
         title='Test Movie',
         genre=genres[0],
         run_time=120,
-        format=formats[0],
+        formatsmovie=movie_formats[0],
         collection=collections[0],
         user=users[0]
         )

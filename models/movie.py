@@ -12,19 +12,19 @@ class Movie(db.Model):
     
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
-    format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
+    format_id = db.Column(db.Integer, db.ForeignKey('formatsmovie.id'))
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
 
     collection = db.relationship('Collection', back_populates='movies', cascade='all, delete')
     genre = db.relationship('Genre', back_populates='movies')
-    format = db.relationship('Format', back_populates='movies')
+    formatsmovie = db.relationship('FormatMovie', back_populates='movies')
     user = db.relationship('User', back_populates='movies')
 
 # define marshmallow schema to serialise data
 class MovieSchema(ma.Schema):
     user = fields.Nested('UserSchema', only=['name', 'email'])
     genre = fields.Nested('GenreSchema', exclude=['id'])
-    format = fields.Nested('FormatSchema', exclude=['id'])
+    formatsmovie = fields.Nested('FormatMovieSchema', exclude=['id'])
     collection = fields.Nested('CollectionSchema', exclude=['movies', 'books'])
 
 # marshmallow schema validation
@@ -37,11 +37,11 @@ class MovieSchema(ma.Schema):
     # run time field validation, requires value of at least 1 for movie run time
     run_time = fields.Integer(required=True, validate=[Range(min=1, error="A movies run time must be greater than zero.")])
 
-    # format id validation, requires id of 6,7 or 8 as they are supported movie formats
-    format_id = fields.Integer(validate=[Range(min=6, max=8, error="A movie must belong to a movie based format.")])
+    # format id validation, required
+    format_id = fields.Integer(required=True)
 
     class Meta:
-        fields = ('id', 'user', 'title', 'genre', 'run_time', 'format', 'collection', 'collection_id', 'genre_id', 'format_id', 'user_id')
+        fields = ('id', 'user', 'title', 'genre', 'run_time', 'formatsmovie', 'collection', 'collection_id', 'genre_id', 'format_id', 'user_id')
         ordered = True
 
 movie_schema = MovieSchema()

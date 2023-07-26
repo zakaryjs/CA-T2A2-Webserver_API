@@ -39,8 +39,8 @@ class BookSchema(ma.Schema):
     # page count field validation, requires value of at least 1 for book page count
     page_count = fields.Integer(required=True, validate=[Range(min=1, error="A books page count must be greater than zero.")])
 
-    # format id validation, requires id of 1-5 as they are supported book formats
-    format_id = fields.Integer(validate=[Range(min=1, max=5, error="A book must belong to a book based format.")])
+    # format id validation, required
+    format_id = fields.Integer(required=True)
 
     class Meta:
         fields = ('id', 'user', 'title', 'genre', 'page_count', 'format', 'collection', 'collection_id', 'genre_id', "format_id', 'user_id'")
