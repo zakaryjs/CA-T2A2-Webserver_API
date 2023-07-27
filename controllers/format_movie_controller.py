@@ -35,7 +35,7 @@ def create_format():
     db.session.commit()
     return formatmovies_schema.dump(format), 201
 
-@movieformats_bp.route('/<int:id', methods=['DELETE'])
+@movieformats_bp.route('/<int:id>', methods=['DELETE'])
 @jwt_required()
 def delete_one_movie_format(id):
     '''/movie_formats/id DELETE route that will use the ID in the URL to locate the movie format, verify the user as admin and then remove the movie format from the database'''
