@@ -45,7 +45,7 @@ def create_movie():
 @jwt_required()
 def delete_one_movie(id):
     '''/movies/id DELETE route that will use the ID in the URL to locate the movie, verify the user as admin and then remove the movie from the database'''
-    admin_status = authorise_admin # authorise_admin function checks whether user has admin permissions
+    admin_status = authorise_admin() # authorise_admin function checks whether user has admin permissions
     if not admin_status:
         return {'error': 'You must have admin permissions to delete movies.'} # if not admin return this error message
     stmt = db.select(Movie).filter_by(id=id) # filter movies by the id to find specific movie

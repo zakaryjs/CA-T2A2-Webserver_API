@@ -39,7 +39,7 @@ def create_genre():
 @jwt_required()
 def delete_one_genre(id):
     '''/genres/id DELETE route that will use the ID in the URL to locate the genre, verify the user as admin and then remove the genre from the database'''
-    admin_status = authorise_admin
+    admin_status = authorise_admin()
     if not admin_status:
         return {'error': 'You must have admin permissions to delete genres.'} # if not admin return this error message
     stmt = db.select(Genre).filter_by(id=id)

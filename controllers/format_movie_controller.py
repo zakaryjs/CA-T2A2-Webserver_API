@@ -39,7 +39,7 @@ def create_format():
 @jwt_required()
 def delete_one_movie_format(id):
     '''/movie_formats/id DELETE route that will use the ID in the URL to locate the movie format, verify the user as admin and then remove the movie format from the database'''
-    admin_status = authorise_admin
+    admin_status = authorise_admin()
     if not admin_status:
         return {'error': 'You must have admin permissions to delete movie formats.'} # if not admin return this error message
     stmt = db.select(FormatMovie).filter_by(id=id)

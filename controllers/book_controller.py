@@ -51,7 +51,7 @@ def create_book():
 @jwt_required()
 def delete_one_book(id):
     '''/books/id DELETE route that will use the ID in the URL to locate the book, verify the user as admin and then remove the book from the database'''
-    admin_status = authorise_admin # authorise_admin function checks whether user has admin permissions
+    admin_status = authorise_admin() # authorise_admin function checks whether user has admin permissions
     if not admin_status:
         return {'error': 'You must have admin permissions to delete books.'} # if not admin return this error message
     stmt = db.select(Book).filter_by(id=id) # filter books by the id to find specific book

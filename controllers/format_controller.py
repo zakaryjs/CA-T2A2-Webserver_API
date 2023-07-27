@@ -39,7 +39,7 @@ def create_format():
 @jwt_required()
 def delete_one_format(id):
     '''/formats/id DELETE route that will use the ID in the URL to locate the format, verify the user as admin and then remove the format from the database'''
-    admin_status = authorise_admin
+    admin_status = authorise_admin()
     if not admin_status:
         return {'error': 'You must have admin permissions to delete formats.'} # if not admin return this error message
     stmt = db.select(Format).filter_by(id=id)
