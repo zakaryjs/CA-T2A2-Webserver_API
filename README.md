@@ -901,4 +901,30 @@ The FormatsMovies Schema ensures that the name of any format in the database is 
 
 ### R10: Describe the way tasks are allocated and tracked in your project
 
+All tasks were estbalished and organised inside of my Trello Board:
+
 [Trello Board](https://trello.com/invite/b/LaCoYbLG/ATTI530e5c791577751ea1a95fcc9be416a1B3DB7C3C/t2a2-webserver-api)
+
+I first created custom labels, in order to establish a priority system:
+
+Green = Low Priority
+Yellow = Medium Priority
+Red = High Priority
+
+I then created the categories that I new had to be done - the planning, the coding, and the reviewing.
+After this, I began putting specific tasks under their set category. For planning, this included drafting ideas, creating a draft ERD for submission, and deciding on the idea and creating the board.
+
+I set the due date as July 7 - the day that all of the planning was done, in order to ensure that I was motivated to get it done so that I could begin work on the actual project. I also wanted to get the original repository set up on that day, as, again, I wanted to get started on the project the next time that I was ready to work on the project.
+
+I had planned to have a majority of the code to be done after two weeks, however, gave myself a bit of extra space in regards to writing the README and doing the final checks so that if there were any issues, I would be able to solve them in time. 
+
+This proved to be beneficial, as I did end up having issues regarding the collection and book/movies tables, however once these issues were solved I was able to work on the validation part of the assignment.
+
+After this was done, I began work on the requirements for the README.
+As of the 27th of July, as I am writing this, the Trello Board looks like this:
+
+
+
+
+
+Having this Trello Board and making use of dates, labels and checklists, meant that I would be able to hold myself to deadlines, be able to see the progress, and most importantly, ensure that I would get the project done on time.
