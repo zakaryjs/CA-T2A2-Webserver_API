@@ -93,15 +93,23 @@ Another aspect of this problem is that a user may become overwhelmed by the idea
 
 ### R3: Why have you chosen this database system. What are the drawbacks compared to others?
 
-The database system that I chose to use for this assignment is PostgreSQL. I chose this database system as it is what I am familiar with.
+The database system that I chose to use for this assignment is PostgreSQL. I chose this database system as it is what I am familiar with, and it supported everything that I needed in order to complete the assignment.
+
+The database needed to be:
+
+- Something I knew how to use
+- Supported relational databases
+- Had ORM functionality, one that I was familiar with (SQLAlchemy)
+
+Postgres ticks all of these boxes, and as such I chose it for this assignment.
 
 **Advantages**
 
-Postgres has many features that allow for the database to be reliable, keep strong data integrity, and be easily scalable. Postgres also has extensive documentation available online, which made troubleshooting much easier.
+Postgres has many features that allow for the database to be reliable, keep strong data integrity, and be easily scalable. Postgres also has extensive documentation available online, which made troubleshooting much easier. With over 35 years of support, new features and improvements are still being made and as such is a strong option for a database.
 
-Postgres is also fully ACID compliant, which further helps enforce and ensure data integrity and reliability. This assists for those databases with CRUD functionality in mind, ensuring that data is able to be created, modified, viewed and deleted without issue.
+Postgres is also fully ACID compliant, which further helps enforce and ensure data integrity and reliability. This assists for those databases with CRUD functionality in mind, ensuring that data is able to be created, modified, viewed and deleted without issue. This, combined with the CRUD functionality requirements for my assignment, meant that I needed a database that would be able to handle all of these operations and ensure that every piece of data is stored correctly.
 
-Postgres also supports a wide variety of data types, resulting in an overall wider range of use cases for potential applications. Furthermore, users can also define their own parameters in regards to the relations, datatypes, or the database itself, allowing for functionality to be further specialised for its particular use.
+Postgres also supports a wide variety of data types, resulting in an overall wider range of use cases for potential applications. Furthermore, users can also define their own parameters in regards to the relations, datatypes, or the database itself, allowing for functionality to be further specialised for its particular use. This was especially important for my API as I needed to ensure that every piece of information was validated to set parameters, and appeared correctly.
 
 Lastly, Postgres is Open-Source, meaning that developers are able to modify parts of the code as required.
 
@@ -113,16 +121,33 @@ Postgres also has less third party support when compared with other database man
 
 Postgres is also more complicated in regards to the setup, which creates a larger barrier for entry, leading to the overall experience being less beginner-friendly.
 
+Though these are widely considered to be the most common disadvantages, these did not affect me as PSQL met my needs and was something that I was familiar with.
+
 ### R4: Identify and discuss the key functionalities and benefits of an ORM
+
+**Functionality**
 
 ORM stands for Object Relational Mapping. An ORM is a way for an application to interact with a database. 
 
 ORMs use a programming language, instead of plain SQL, for database related commands, making it easier to create queries, and modify the entirety of the database. This also means that developers dont have to constantly switch between writing SQL, and for example, Python, and can just write in the one language. 
 
+ORMs are designed to help simplify the interactions between a database, such as the one used in this assignment, and a programming language, such as Python. 
+
+ORMs, by design, result in developers writing less code in most cases. As they don't have to spend time writing multiple similar, repeated statements and instead allow developers to use functions in order to create queries and other operations.
+
+ORMs also allow developers to easily change the database that the app is currently connected to. In this apps current configuration, and in other apps that use the SQLAlchemy ORM, this can be changed by editing the `.env` file and changing the `DATABASE_URL`. 
+
+ORMs also provide features to allow custom validation, and configuration as to the data types, and requirements of certain fields/tables. other libraries can extend this functionality, e.g. `Marshmallow`, and can be used to ensure data validity and integrity.
+
+**Benefits**
+
+SQL syntax is not required inside of an ORM, and instead may only be used inside of the actual database if it is required.
+
+ORMs provide strong security in regards to database connections, to ensure that all operations are completed, and not intefered with.
+
 ORMs allow for developers to use the object oriented functions of their chosen programming language. This means that knowledge from the functions of a specific programming language can be applied in the creation of database relations, relationships and validation paramaters. 
 
-Furthermore, ORMS have strong support for most SQL tasks. The ORM that is used in this application, SQLAlchemy, makes it easy to create, seed and drop databases. It is also really easy to change which database the application is connected to; this can be done by simply modifying the .env file.
-
+Furthermore, ORMS have strong support for most SQL tasks. The ORM that is used in this application, SQLAlchemy, makes it easy to create, seed and drop databases. It is also really easy to manipulate the data inside of a database that is connected to an ORM as this can be done through the use of functions, which can be repeated a multitude of times instead of having to write single queries.
 ### R5: Document all endpoints for your API
 
 Endpoint documentation should include:
