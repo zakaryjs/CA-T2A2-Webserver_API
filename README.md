@@ -842,6 +842,8 @@ The relationship between the User and Collection tables is established through t
 
 The relationship between the User, and the Book and Movie tables is established through the 'user_id' foreign key in both the book and movie table. This key allows for the user who created the collection to have their unique user_id to be stored inside of any book or movie that they create.
 
+The User Schema ensures that the name, email and password fields are all required to be entered on registration. The name field is required to be at least 2 characters long, and must follow the set character rules. The email field is required to be in the traditional email format, and must be unique - this is in order to prevent duplicates. Lastly, the password must be at least 6 characters long.
+
 **Table 2: Collection**
 
 As shown in the ERD, the Collection table has a many to one relationship with the User table. The Collection table also has a many to one relationship the Book and Movie tables. 
@@ -849,6 +851,8 @@ As shown in the ERD, the Collection table has a many to one relationship with th
 The relationship between the Collection and User tables is established through the 'user_id' foreign key in the collection table. This key allows for the user who created the collection to have their unique user_id to be stored inside of any collection that they create.
 
 The relationship between the Collection, and the Book and Movie tables is established through the 'collection_id' foreign key located in both the book and movie tables. This key allows for the collection that the respective book/movie belongs to have their unique collection_id to be stored inside of any book or movie that belongs to that collection.
+
+The Collection Schema ensures that the name of any collection in the database is required on creation. The name field is required to be at least 2 characters long, and must follow the set character rules. The user_id, as a foreign key, is a requirement, in order to ensure that every collection has an owner.
 
 **Table 3: Book**
 
@@ -858,6 +862,8 @@ The relationship between the Book and Collection tables is established through t
 
 The relationship between the Book, and the Format and Genre tables is established through the 'genre_id' and 'format_id' foreign keys located in the book table. This allows for the genre/format that the book belongs to have their unique genre_id/format_id stored inside of any book that belongs to that genre/format.
 
+The Book Schema ensures that the title of any book in the database is required on creation. The title field is required to be at least 2 characters long, and follow the set character rules. The page count field is required, and must have a value of at least 1 (which book has 0 pages?). The foreign keys, format_id, genre_id and collection_id are all required in order to link the tables together.
+
 **Table 4: Movie**
 
 As shown in the ERD, the Movie table has a many to one relationship with the Collection, Genre and Format tables.
@@ -866,11 +872,15 @@ The relationship between the Movie and Collection tables is established through 
 
 The relationship between the Movie, and the Format and Genre tables is established through the 'genre_id' and 'format_id' foreign keys located in the movie table. This allows for the genre/format that the movie belongs to have their unique genre_id/format_id stored inside of any movie that belongs to that genre/format.
 
+The Movie Schema ensures that the title of any movie in the database is required on creation. The title field is required to be at least 2 characters long, and follow the set character rules. The run time field is required, and must have a value of at least 1 (which movie has a run time of 0 minutes?). The foreign keys, format_id, genre_id and collection_id are all required in order to link the tables together.
+
 **Table 5: Genre**
 
 As shown in the ERD, the Genre table has a one to many relationship with both the Book and Movie tables.
 
 The relationship between the Genre, and the Book and Movie tables is established through the 'genre_id' foreign key that is located in both the Book and Movie tables. This allows for the genre that the book/movie belongs to have their unique genre_id stored inside of any book/movie that belongs to that genre.
+
+The Genre Schema ensures that the name of any genre in the database is required on creation. The genre field is required to be at least 2 characters long, and follow the set character rules. 
 
 **Table 6: Format (Book)**
 
@@ -878,11 +888,15 @@ As shown in the ERD, the Format table has a one to many relationship with the Bo
 
 The relationship between the Format, and the Book table is established through the 'format_id' foreign key that is located in the Book table. This allows for the format that the book belongs to have their unique format_id stored inside of any book that belongs to that format.
 
+The Format Schema ensures that the name of any format in the database is required on creation. The format field is required to be at least 2 characters long, and follow the set character rules. 
+
 **Table 7: Format (Movie)**
 
 As shown in the ERD, the FormatMovie table has a one to many relationship with the Movie table.
 
 The relationship between the FormatMovie, and the Movie table is established through the 'format_id' foreign key that is located in the Movie table. This allows for the format that the movie belongs to have their unique format_id stored inside of any movie that belongs to that format.
+
+The FormatsMovies Schema ensures that the name of any format in the database is required on creation. The format field is required to be at least 2 characters long, and follow the set character rules. 
 
 
 ### R10: Describe the way tasks are allocated and tracked in your project

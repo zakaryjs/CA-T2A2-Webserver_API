@@ -1,4 +1,6 @@
 from init import db, ma
+from marshmallow import fields
+from marshmallow.validate import Length, And, Regexp
 
 # define format model for database
 class FormatMovie(db.Model):
@@ -11,6 +13,12 @@ class FormatMovie(db.Model):
 
 # define marshmallow schema to serialise data
 class FormatMovieSchema(ma.Schema):
+
+    format = fields.String(required=True, validate=And(
+        Length(min=2, error='The name of a format must be at least two characters long.'),
+        Regexp('^[a-zA-Z0-9 ]+$', error='Only letters, numbers, and spaces are allowed in format names.')
+    ))
+
     class Meta:
         fields = ('id', 'format')
         ordered = True

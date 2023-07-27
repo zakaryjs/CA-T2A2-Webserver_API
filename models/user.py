@@ -30,7 +30,7 @@ class UserSchema(ma.Schema):
     # email field validation, minimum 2 characters and select characters only
     email = fields.String(required=True, validate=Email)
 
-    password = fields.String(validate=Length(min=6))
+    password = fields.String(required=True, validate=Length(min=6))
     
     class Meta:
         fields = ('id', 'name', 'email', 'password', 'is_admin')

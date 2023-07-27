@@ -42,6 +42,12 @@ class BookSchema(ma.Schema):
     # format id validation, required
     format_id = fields.Integer(required=True)
 
+    # genre id validation, required
+    genre_id = fields.Integer(required=True)
+
+    # collection id validation, required
+    collection_id = fields.Integer(required = True)
+
     class Meta:
         fields = ('id', 'user', 'title', 'genre', 'page_count', 'format', 'collection', 'collection_id', 'genre_id', "format_id', 'user_id'")
         ordered = True
