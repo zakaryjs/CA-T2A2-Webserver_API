@@ -48,7 +48,7 @@ def delete_one_movie(id):
     admin_status = authorise_admin # authorise_admin function checks whether user has admin permissions
     if not admin_status:
         return {'error': 'You must have admin permissions to delete movies.'} # if not admin return this error message
-    stmt = db.select(Movie).filter_by(id) # filter movies by the id to find specific movie
+    stmt = db.select(Movie).filter_by(id=id) # filter movies by the id to find specific movie
     movie = db.session.scalar(stmt)
     if movie:
         db.session.delete(movie)

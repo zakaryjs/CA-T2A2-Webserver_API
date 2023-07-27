@@ -54,7 +54,7 @@ def delete_one_book(id):
     admin_status = authorise_admin # authorise_admin function checks whether user has admin permissions
     if not admin_status:
         return {'error': 'You must have admin permissions to delete books.'} # if not admin return this error message
-    stmt = db.select(Book).filter_by(id) # filter books by the id to find specific book
+    stmt = db.select(Book).filter_by(id=id) # filter books by the id to find specific book
     book = db.session.scalar(stmt)
     if book:
         db.session.delete(book)

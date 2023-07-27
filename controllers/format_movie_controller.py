@@ -42,7 +42,7 @@ def delete_one_movie_format(id):
     admin_status = authorise_admin
     if not admin_status:
         return {'error': 'You must have admin permissions to delete movie formats.'} # if not admin return this error message
-    stmt = db.select(FormatMovie).filter_by(id)
+    stmt = db.select(FormatMovie).filter_by(id=id)
     format = db.session.scalar(stmt)
     if format:
         db.session.delete(format)

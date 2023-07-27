@@ -42,7 +42,7 @@ def delete_one_genre(id):
     admin_status = authorise_admin
     if not admin_status:
         return {'error': 'You must have admin permissions to delete genres.'} # if not admin return this error message
-    stmt = db.select(Genre).filter_by(id)
+    stmt = db.select(Genre).filter_by(id=id)
     genre = db.session.scalar(stmt)
     if genre:
         db.session.delete(genre)

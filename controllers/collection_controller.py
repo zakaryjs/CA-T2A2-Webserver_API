@@ -44,7 +44,7 @@ def delete_one_collection(id):
     admin_status = authorise_admin # function to authorise user as admin
     if not admin_status:
         return {'error': 'You must have admin permissions to delete collections.'} # if not admin return this error message
-    stmt = db.select(Collection).filter_by(id) # filter collections by ID to find the requested collection
+    stmt = db.select(Collection).filter_by(id=id) # filter collections by ID to find the requested collection
     collection = db.session.scalar(stmt)
     if collection:
         db.session.delete(collection)
