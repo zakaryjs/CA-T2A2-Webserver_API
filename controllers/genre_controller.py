@@ -54,6 +54,7 @@ def delete_one_genre(id):
 @genres_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_one_genre(id):
+    '''/genres/id PUT/PATCH route that will use the ID in the URL in order to find the genreand then allow the user to update details of the genre'''
     json_data = genre_schema.load(request.get_json(), partial=True)
     stmt = db.select(Genre).filter_by(id=id)
     genre = db.session.scalar(stmt)

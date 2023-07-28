@@ -56,6 +56,7 @@ def delete_one_collection(id):
 @collections_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_one_collection(id):
+    '''/collections/id PUT/PATCH route that will use the ID in the URL in order to find the collection, verify the user as the owner of the collection, and then allow the user to update details of the collection'''
     json_data = collection_schema.load(request.get_json(), partial=True)
     stmt = db.select(Collection).filter_by(id=id)
     collection = db.session.scalar(stmt)

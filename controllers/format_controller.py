@@ -54,6 +54,7 @@ def delete_one_format(id):
 @formats_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_one_format(id):
+    '''/formats/id PUT/PATCH route that will use the ID in the URL in order to find the format, and then allow the user to update details of the format'''
     json_data = format_schema.load(request.get_json(), partial=True)
     stmt = db.select(Format).filter_by(id=id)
     format = db.session.scalar(stmt)

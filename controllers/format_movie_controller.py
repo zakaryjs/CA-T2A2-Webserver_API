@@ -54,6 +54,7 @@ def delete_one_movie_format(id):
 @movieformats_bp.route('/<int:id>', methods=['PUT', 'PATCH'])
 @jwt_required()
 def update_one_movie_format(id):
+    '''/movie_formats/id PUT/PATCH route that will use the ID in the URL in order to find the format, and then allow the user to update details of the format'''
     json_data = formatmovies_schema.load(request.get_json(), partial=True)
     stmt = db.select(FormatMovie).filter_by(id=id)
     format = db.session.scalar(stmt)
