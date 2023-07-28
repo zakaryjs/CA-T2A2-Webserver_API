@@ -6,7 +6,7 @@ from controllers.book_controller import authorise_admin
 
 movieformats_bp = Blueprint('movie_formats', __name__, url_prefix='/movie_formats')
 
-movieformats_bp.route('/')
+@movieformats_bp.route('/')
 def get_all_movie_formats():
     '''/movie_formats GET route displays all formats to the user'''
     stmt = db.select(FormatMovie).order_by(FormatMovie.id.desc()) # filters the database to formats, in descending order
