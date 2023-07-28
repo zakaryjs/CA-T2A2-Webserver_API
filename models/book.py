@@ -17,7 +17,7 @@ class Book(db.Model):
     format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
 
-    collection = db.relationship('Collection', back_populates='books', cascade='all, delete')
+    collection = db.relationship('Collection', back_populates='books')
     genre = db.relationship('Genre', back_populates='books')
     format = db.relationship('Format', back_populates='books')
     user = db.relationship('User', back_populates='books')

@@ -12,8 +12,8 @@ class Collection(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = db.relationship('User', back_populates='collections')
-    movies = db.relationship('Movie', back_populates='collection')
-    books = db.relationship('Book', back_populates='collection')
+    movies = db.relationship('Movie', back_populates='collection', cascade='all, delete')
+    books = db.relationship('Book', back_populates='collection', cascade='all, delete')
 
 # define marshmallow schema to serialise data
 class CollectionSchema(ma.Schema):
