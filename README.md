@@ -91,7 +91,7 @@ This problem needs solving as it is too easy to lose track of what media you may
 
 Another aspect of this problem is that a user may become overwhelmed by the idea of having to sort through their media to find a certain book/movie, and as such may stick to just rereading or rewatching specific books or movies, failing to take advantage of the pieces of media they own.
 
-### R3: Why have you chosen this database system. What are the drawbacks compared to others?
+### R3: Why have you chosen this database system. What are the drawbacks compared to others? [^10]
 
 The database system that I chose to use for this assignment is PostgreSQL. I chose this database system as it is what I am familiar with, and it supported everything that I needed in order to complete the assignment.
 
@@ -123,7 +123,7 @@ Postgres is also more complicated in regards to the setup, which creates a large
 
 Though these are widely considered to be the most common disadvantages, these did not affect me as PSQL met my needs and was something that I was familiar with.
 
-### R4: Identify and discuss the key functionalities and benefits of an ORM
+### R4: Identify and discuss the key functionalities and benefits of an ORM [^8]
 
 **Functionality**
 
@@ -673,23 +673,23 @@ JWT Token
 
 ### R7: Detail any third party services that your app will use
 
-**Flask**
+**Flask** [^1] [^2]
 Flask is a lightweight, and easily expandable web framework built for Python. Flask is designed to be easy to use, and easy to fit to any users needs. Flask makes use of the Web Server Gateway Interface in order to process the requests between a web server and the Flask app itself. It allows users to efficiently build web applications. At its core, Flask provides users with the ability to design routes, with specified HTTP requests, and allows them to associate these routes with HTML and CSS, in order to create a front end. As it is a lightweight framework, a key feature is to be able to, as mentioned above, easily expand its functionality through the use of libraries or other extensions.
 
-**Psycopg2**
+**Psycopg2** [^3]
 Psycopg2 is a PostgreSQL database adapter for Python, that allows for Python apps to directly connect to a PostgreSQL database. The adapter was designed for databases which perform a significant number of CRUD based operations, and as such is able to efficiently perform these operations without issue. Psycopg2 is defined to be both efficient and secure, and as such is a reliable way to connect Python applications to PSQL databases.
 
-**SQLAlchemy** 
+**SQLAlchemy** [^9]
 SQLAlchemy is an Object Relational Mapper that allows Python developers to take full advantage of the power of SQL, through an adapted language based on Python. SQLAlchemy allows developers to interact with SQL databases through the use of Python objects, which act as the data stored inside of an SQL database. Database tables are defined as classes, and nest inside them all fields of a certain table and their relationships between other tables. SQLAlchemy allows developers to perform highly sophisticated SQL queries without writing SQL itself, meaning that databases can be modified directly from the ORM.
 
-**Marshmallow**
+**Marshmallow** [^4] [^5]
 Marshmallow is a library that is used to both serialise and deserialise objects for use with Python and ORMs. Marshmallow is used to convert complex datatypes, including dictionaries, into the JSON format, from which they can then be used in web server APIs. Marshmallow also provides a schema functionality, which allows for validation of data, as well as deserialisation and serialisation of objects in order to ensure consistency and reliability when converting data between app-level objects and Python datatypes.
 
-**Bcrypt**
+**Bcrypt** [^6]
 Bcrypt is a library that uses cryptographic functions in order to securely hash, and then salt plain text, sensitive data, that results in an unreadable string. Bcrypt is designed to be slow at this process, in order to reduce the strength, severity, and speed of brute-force based attacks, in order to ensure that encrypted hashes are as secure as possible. Bcrypts abilities to prevent brute-force attacks, and compensate for future faster hardware ensure that the library will still be secure in the future.
 
 
-**JWT Token (JSON Web Token)**
+**JWT Token (JSON Web Token)** [^7]
 A JSON Web Token is a JSON Object which is used to reliably and securely transfer pieces of information between two destinations over the internet. JWT is often used in web apps and servers such as this Media Management API in order to verify a users identity before performing specific CRUD operations. A JWT has three parts: Header, Payload, and Signature. The header contains the type of the token (JWT), and the algorithm used for signing (eg SHA256). The Payload contains claims, which are the pieces of information that is being exchanged via the token. The signature is used to valid and ensure that the contents of the exchanged message were not modified in anyway.
 
 ### R8: Describe your projects models in terms of the relationships they have with each other
@@ -737,14 +737,14 @@ class Collection(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     user = db.relationship('User', back_populates='collections')
-    movies = db.relationship('Movie', back_populates='collection')
-    books = db.relationship('Book', back_populates='collection')
+    movies = db.relationship('Movie', back_populates='collection', cascade='all, delete')
+    books = db.relationship('Book', back_populates='collection', cascade='all, delete')
 ```
 
 The collection model contains fields for a collections ID (assigned at creation of new collection), and the name of a collection.
 
 The collection model has a many to one relationship with users - a 'User' back populates multiple collections.
-The collection model also has a many to one relationship with both books and movies - a multitude of books and movies can belong to a singular collection.
+The collection model also has a many to one relationship with both books and movies - a multitude of books and movies can belong to a singular collection. The `cascade='all, delete'` at the end of the movies and books lines, means that if a collection is deleted, all of the books and movies inside the collection are too.
 
 **Model 3: Book**
 
@@ -761,7 +761,7 @@ class Book(db.Model):
     format_id = db.Column(db.Integer, db.ForeignKey('formats.id'))
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
 
-    collection = db.relationship('Collection', back_populates='books', cascade='all, delete')
+    collection = db.relationship('Collection', back_populates='books')
     genre = db.relationship('Genre', back_populates='books')
     format = db.relationship('Format', back_populates='books')
     user = db.relationship('User', back_populates='books')
@@ -788,7 +788,7 @@ class Movie(db.Model):
     format_id = db.Column(db.Integer, db.ForeignKey('formatsmovie.id'))
     collection_id = db.Column(db.Integer, db.ForeignKey('collections.id'), nullable=False)
 
-    collection = db.relationship('Collection', back_populates='movies', cascade='all, delete')
+    collection = db.relationship('Collection', back_populates='movies')
     genre = db.relationship('Genre', back_populates='movies')
     formatsmovie = db.relationship('FormatMovie', back_populates='movies')
     user = db.relationship('User', back_populates='movies')
@@ -953,3 +953,26 @@ As of the 27th of July, as I am writing this, the Trello Board looks like this:
 
 
 Having this Trello Board and making use of dates, labels and checklists, meant that I would be able to hold myself to deadlines, be able to see the progress, and most importantly, ensure that I would get the project done on time.
+
+
+Sources:
+
+[^1]: Flask. Full Stack Python. (n.d.). https://www.fullstackpython.com/flask.html 
+
+[^2]: Stud, P. (2020, September 30). What is WSGI (web server gateway interface)?. Medium. https://medium.com/analytics-vidhya/what-is-wsgi-web-server-gateway-interface-ed2d290449e 
+
+[^3]: PSYCOPG2. PyPI. (n.d.). https://pypi.org/project/psycopg2/ 
+
+[^4]: Marshmallow. marshmallow. (n.d.). https://marshmallow.readthedocs.io/en/stable/ 
+
+[^5]: Tran, B. (2020, December 10). Object serialization and deserialization in Python. DEV Community. https://dev.to/billtrn/object-serialization-and-deserialization-in-python-3i26#:~:text=Deserialization%20is%20the%20reverse%20process,them%20back%20into%20custom%20objects. 
+
+[^6]: Engineer, D. A. C. (2021, February 25). Hashing in action: Understanding bcrypt. Auth0. https://auth0.com/blog/hashing-in-action-understanding-bcrypt/ 
+
+[^7]: auth0.com. (n.d.). JSON web tokens introduction. JSON Web Token Introduction. https://jwt.io/introduction 
+
+[^8]: Abba, I. V. (2022, October 21). What is an ORM – the meaning of object relational mapping database tools. freeCodeCamp.org. https://www.freecodecamp.org/news/what-is-an-orm-the-meaning-of-object-relational-mapping-database-tools/ 
+
+[^9]: Sqlalchemy. SQLAlchemy. (n.d.). https://www.sqlalchemy.org/ 
+
+[^10]: What is postgresql?: Features: Advantages and disadvantages. EDUCBA. (2023, July 28).https://www.educba.com/what-is-postgresql/
